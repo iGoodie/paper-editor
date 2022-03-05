@@ -9,7 +9,7 @@ import { theme } from "./theme";
 import "paper-editor/dist/index.css";
 
 paperEditor.configure({
-  millimeterToPixelRatio: 10,
+  millimeterToPixelRatio: 2,
 });
 
 paperEditor.registries.LayersRegistry.register(StaticTextLayer);
@@ -36,7 +36,7 @@ const App = () => {
         layers={layers}
         onLayersChange={setLayers}
         paperUnit={getUnitByName("centimeters")}
-        paperDimensions={{ width: 1980, height: 720 }}
+        paperDimensions={{ width: 6.1, height: 11 }}
         viewportHeight={500}
         theme={theme}
       />

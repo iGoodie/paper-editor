@@ -13,7 +13,10 @@ interface Props {
 }
 
 export const SingularControlPanel = (props: Props) => {
-  const [editingTitle, setEditingTitle] = React.useState(false);
+  const renameLayerName = (newName: string) => {
+    props.layer.layerName = newName;
+    props.changeLayer(props.layer);
+  };
 
   return (
     <div className={styles.panel}>
@@ -27,10 +30,7 @@ export const SingularControlPanel = (props: Props) => {
           className={styles.panel__header__title}
           defaultValue={getIntlMessage("papereditor.value.untitled")}
           value={props.layer.layerName}
-          onChange={(value) => {
-            props.layer.layerName = value;
-            props.changeLayer(props.layer);
-          }}
+          onChange={renameLayerName}
         />
         <button
           className={styles.panel__header__unselect}

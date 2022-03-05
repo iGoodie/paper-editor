@@ -1,21 +1,22 @@
-import React, { RefObject, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { RootAction } from "../../editor/RootAction";
 import { enterFullscreen } from "../../util/fullscreen.util";
 import { isFullscreenActive } from "../../util/fullscreen.util";
 import { ReactComponent as Icon } from "../../assets/icon/enter-fullscreen.svg";
+import { TransformationHook } from "../../hooks/useTransformation.hook";
 
 export class EnterFullscreenRootAction extends RootAction {
-  isVisible(editorRef: RefObject<HTMLDivElement>): boolean {
+  isVisible(transformation: TransformationHook): boolean {
     return !isFullscreenActive();
   }
 
-  renderIcon(editorRef: RefObject<HTMLDivElement>): ReactNode {
+  renderIcon(transformation: TransformationHook): ReactNode {
     return <Icon />;
   }
 
-  onClick(editorRef: RefObject<HTMLDivElement>): void {
-    if (editorRef.current != null) {
-      enterFullscreen(editorRef.current);
+  onClick(transformation: TransformationHook): void {
+    if (transformation.editorRef.current != null) {
+      enterFullscreen(transformation.editorRef.current);
     }
   }
 }

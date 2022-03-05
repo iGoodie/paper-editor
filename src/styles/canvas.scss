@@ -1,0 +1,35 @@
+.canvas {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.paper {
+  width: var(--paper-width);
+  height: var(--paper-height);
+  background-image: var(--paper-background);
+}
+
+.manifest {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: fit-content;
+  transform-origin: left top;
+  white-space: nowrap;
+  color: #fff;
+
+  & > h1 {
+    margin: 0;
+    font-family: var(--header-font);
+    font-weight: 400;
+    font-size: 25px;
+  }
+
+  & > h2 {
+    margin: 0;
+    font-family: var(--header-font);
+    font-weight: 400;
+    font-size: 20px;
+  }
+}

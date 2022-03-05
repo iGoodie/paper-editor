@@ -26,5 +26,11 @@ export { Layer } from "./editor/Layer";
 
 import { EnterFullscreenRootAction } from "./built-in/root-action/EnterFullscreenRootAction";
 import { ExitFullscreenRootAction } from "./built-in/root-action/ExitFullscreenRootAction";
+import { ZoomCenterRootAction } from "./built-in/root-action/ZoomCenterRootAction";
+import { ZoomOutRootAction } from "./built-in/root-action/ZoomOutRootAction";
+import { ZoomInRootAction } from "./built-in/root-action/ZoomInRootAction";
 RootActionsRegistry.register(new EnterFullscreenRootAction());
 RootActionsRegistry.register(new ExitFullscreenRootAction());
+RootActionsRegistry.register(new ZoomCenterRootAction());
+RootActionsRegistry.register(new ZoomOutRootAction());
+RootActionsRegistry.register(new ZoomInRootAction());

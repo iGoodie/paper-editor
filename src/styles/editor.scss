@@ -19,10 +19,12 @@
   }
 
   &__viewport {
-    flex-grow: 1;
+    position: relative;
+    width: 100%;
     background-color: var(--canvas-background-color);
     background-image: var(--canvas-background-image);
     background-repeat: repeat;
+    overflow: hidden;
   }
 
   &__rootactions {
@@ -31,7 +33,7 @@
     right: 30px;
     display: flex;
     gap: 10px;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     & > button {
       border: none;

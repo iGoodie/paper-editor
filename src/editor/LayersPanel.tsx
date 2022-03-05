@@ -47,16 +47,25 @@ export const LayersPanel = (props: Props) => {
       <div
         className={classes(
           styles["selection-controls"],
-          selectedLayers.length != 0 && styles["selection-controls--active"]
+          selectedLayers.length == 1 && styles["selection-controls--active"]
         )}
       >
-        {selectedLayers.length == 1 ? (
+        {selectedLayers.length == 1 && (
           <SingularControlPanel
             layer={props.layers[selectedLayers[0]]}
             changeLayer={changeLayer(selectedLayers[0])}
             unselectLayers={unselectLayers}
           />
-        ) : null}
+        )}
+      </div>
+
+      <div
+        className={classes(
+          styles["selection-controls"],
+          selectedLayers.length == 2 && styles["selection-controls--active"]
+        )}
+      >
+        Foo
       </div>
     </React.Fragment>
   );

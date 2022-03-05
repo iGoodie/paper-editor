@@ -7,7 +7,7 @@ interface Props {
   className?: string;
   defaultValue: string;
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | null) => void;
 }
 
 export const EditableText = (props: Props) => {
@@ -42,7 +42,7 @@ export const EditableText = (props: Props) => {
         style={{ display: !editable ? "none" : "unset" }}
         placeholder={props.defaultValue}
         value={props.value || ""}
-        onChange={(event) => props.onChange(event.target.value)}
+        onChange={(event) => props.onChange(event.target.value || null)}
         onKeyDown={(event) =>
           !event.repeat && event.key == "Enter" && inputRef.current?.blur()
         }

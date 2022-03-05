@@ -1,9 +1,10 @@
 import React from "react";
+import { TransformationHook } from "../hooks/useTransformation.hook";
 
 export abstract class RootAction {
-  abstract isVisible(editorRef: React.RefObject<HTMLDivElement>): boolean;
+  abstract isVisible(transformation: TransformationHook): boolean;
 
-  abstract renderIcon(editorRef: React.RefObject<HTMLDivElement>): React.ReactNode;
+  abstract renderIcon(transformation: TransformationHook): React.ReactNode;
 
-  abstract onClick(editorRef: React.RefObject<HTMLDivElement>): void;
+  abstract onClick(transformation: TransformationHook): void;
 }
