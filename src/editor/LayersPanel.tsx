@@ -23,8 +23,9 @@ export const LayersPanel = (props: Props) => {
 
       <div className={styles.content}>
         <ol className={styles.content__list}>
-          {props.layers.map((layer) => (
+          {props.layers.map((layer, index) => (
             <LayerItem
+              key={index}
               layer={layer}
               paperUnit={props.paperUnit}
               onClick={() => setSelectedLayer(layer)}

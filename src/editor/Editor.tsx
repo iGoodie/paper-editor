@@ -1,10 +1,12 @@
 import React from "react";
-import style from "../styles/editor.scss";
+import styles from "../styles/editor.scss";
 import { Theme, themeToCssVars } from "./Theme";
 import { useInlineStyle } from "../hooks/useInlineStyle.hook";
 import { LayersPanel } from "./LayersPanel";
 import { Layer } from "./Layer";
 import { MeasurementUnit } from "../util/units.util";
+import { mapRootActions } from "../registry/root-actions.registry";
+import { useFullscreen } from "../hooks/useFullscreen.hook";
 
 interface Props {
   viewportHeight: number;
@@ -20,7 +22,10 @@ interface Props {
 }
 
 export const Editor = (props: Props) => {
+  const editorRef = React.useRef<HTMLDivElement>(null);
   const viewportRef = React.useRef<HTMLDivElement>(null);
+
+  useFullscreen();
 
   const editorVars = useInlineStyle(
     () => ({
@@ -33,14 +38,39 @@ export const Editor = (props: Props) => {
   console.log(props.layers.map((layer) => layer.serialize()));
 
   return (
-    <div className={style.editor} style={editorVars}>
-      <div className={style.editor__layers}>
+    <div ref={editorRef} className={styles.editor} style={editorVars}>
+      <div className={styles.editor__layers}>
         <LayersPanel layers={props.layers} paperUnit={props.paperUnit} />
       </div>
 
-      <div ref={viewportRef} className={style.editor__viewport}>
+      <div ref={viewportRef} className={styles.editor__viewport}>
         <p>Viewport</p>
+      </div>
+
+      <div className={styles.editor__rootactions}>
+        {mapRootActions(editorRef, (rootAction) => (
+          <button onClick={() => rootAction.onClick(editorRef)}>
+            {rootAction.renderIcon(editorRef)}
+          </button>
+        ))}
       </div>
     </div>
   );
+};
+
+/* ---------------- */
+
+type DigiconLayerShape = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fieldName: string;
+  color: string;
+  textAlign: "left" | "right" | "center";
+  autoFit: boolean;
+  fontSize: number;
+  fontFamily: string;
+  data: any | null;
+  value: any | null;
 };
