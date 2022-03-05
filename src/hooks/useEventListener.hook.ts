@@ -1,7 +1,10 @@
 import React from "react";
 
-export function useEventListener<K extends keyof HTMLElementEventMap>(
-  element: HTMLElement | null,
+export function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  E extends HTMLElement
+>(
+  ref: React.RefObject<E>,
   eventName: K,
   handler: (event: HTMLElementEventMap[K]) => void
 ) {
@@ -18,24 +21,23 @@ export function useEventListener<K extends keyof HTMLElementEventMap>(
 
   React.useEffect(
     () => {
-      console.log({ eventName, element });
-
-      if (element == null) {
+      const targetElement: E | Window = ref?.current || window;
+      if (!(targetElement && targetElement.addEventListener)) {
         return;
       }
 
       // Create event listener that calls handler function stored in ref
-      const eventListener = (event: HTMLElementEventMap[K]) =>
+      const eventListener: typeof handler = (event) =>
         savedHandler.current?.(event);
 
       // Add event listener
-      element.addEventListener(eventName, eventListener);
+      targetElement.addEventListener(eventName, eventListener);
 
       // Remove event listener on cleanup
       return () => {
-        element.removeEventListener(eventName, eventListener);
+        targetElement.removeEventListener(eventName, eventListener);
       };
     },
-    [eventName, element] // Re-run if eventName or element changes
+    [eventName, ref] // Re-run if eventName or element changes
   );
 }

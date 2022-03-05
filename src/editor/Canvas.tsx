@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const viewportRef = props.transformations.viewportRef.current;
+  const viewportRef = props.transformations.viewportRef;
 
   const onMouseWheel = (event: WheelEvent) => {
     event.preventDefault();

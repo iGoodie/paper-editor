@@ -17,19 +17,19 @@ export const EditableText = (props: Props) => {
 
   const [editable, setEditable] = React.useState(false);
 
-  const makeEditable = React.useCallback(() => {
+  const makeEditable = () => {
     setEditable(true);
-  }, []);
+  };
 
-  const makeUneditable = React.useCallback(() => {
+  const makeUneditable = () => {
     if (document.activeElement != inputRef.current) {
       setEditable(false);
     }
-  }, []);
+  };
 
-  useEventListener(spanRef.current, "mouseenter", makeEditable);
-  useEventListener(inputRef.current, "mouseleave", makeUneditable);
-  useEventListener(inputRef.current, "focusout", makeUneditable);
+  useEventListener(spanRef, "mouseenter", makeEditable);
+  useEventListener(inputRef, "mouseleave", makeUneditable);
+  useEventListener(inputRef, "focusout", makeUneditable);
 
   return (
     <div className={classes(props.className, styles.container)}>
