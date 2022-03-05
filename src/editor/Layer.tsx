@@ -2,10 +2,10 @@ import React from "react";
 
 export abstract class Layer {
   layerName: string;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  x: number = 0;
+  y: number = 0;
+  width: number = 0;
+  height: number = 0;
 
   abstract getType(): string;
 
@@ -28,10 +28,10 @@ export abstract class Layer {
 
   deserialize(serialized: Partial<Record<keyof Layer, any>>) {
     this.layerName = serialized.layerName;
-    this.x = serialized.x;
-    this.y = serialized.y;
-    this.width = serialized.width;
-    this.height = serialized.height;
+    if ("x" in serialized) this.x = serialized.x;
+    if ("y" in serialized) this.y = serialized.y;
+    if ("width" in serialized) this.width = serialized.width;
+    if ("height" in serialized) this.height = serialized.height;
     return this;
   }
 }

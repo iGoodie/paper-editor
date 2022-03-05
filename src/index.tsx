@@ -1,3 +1,6 @@
+// Measurement Units
+export * from "./util/units.util";
+
 // Configurations & Registries
 export { configure } from "./registry/configurations";
 import * as LayersRegistry from "./registry/layers.registry";
