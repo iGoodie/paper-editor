@@ -15,19 +15,26 @@ paperEditor.configure({
 paperEditor.registries.LayersRegistry.register(StaticTextLayer);
 
 const App = () => {
+  const [layers, setLayers] = React.useState<paperEditor.Layer[]>([
+    new StaticTextLayer().deserialize({
+      width: 100,
+      height: 200,
+    }),
+    new StaticTextLayer().deserialize({
+      layerName: "A very static name",
+      data: "Hey there!",
+    }),
+    new StaticTextLayer().deserialize({
+      layerName: "Sooooo long to fit here lmao",
+      data: "Hey there!",
+    }),
+  ]);
+
   return (
     <div style={{ margin: 25 }}>
       <Editor
-        layers={[
-          new StaticTextLayer().deserialize({
-            width: 100,
-            height: 200,
-          }),
-          new StaticTextLayer().deserialize({
-            layerName: "A very static name",
-            data: "Hey there!",
-          }),
-        ]}
+        layers={layers}
+        onLayersChange={setLayers}
         paperUnit={getUnitByName("centimeters")}
         paperDimensions={{ width: 1980, height: 720 }}
         viewportHeight={500}

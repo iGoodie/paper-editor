@@ -1,0 +1,42 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+
+  & > input {
+    background: none;
+    border: none;
+    width: auto;
+    height: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: italic;
+    color: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:not(:focus):hover + svg {
+      position: absolute;
+      right: 0;
+      width: 20px;
+      height: 20px;
+      display: block !important;
+    }
+
+    &:focus {
+      outline-color: currentColor;
+    }
+  }
+
+  & > span {
+    width: auto;
+    height: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

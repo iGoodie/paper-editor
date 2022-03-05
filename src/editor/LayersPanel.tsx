@@ -5,14 +5,24 @@ import { ReactComponent as LayersIcon } from "../assets/icon/layers.svg";
 import { getIntlMessage } from "../registry/intl/intl";
 import { LayerItem } from "./LayerItem";
 import { classes } from "../util/classes.util";
+import { SingularControlPanel } from "./SingularControlPanel";
 
 interface Props {
   layers: Layer[];
+  onLayersChange: (layers: Layer[]) => void;
   paperUnit: MeasurementUnit;
 }
 
 export const LayersPanel = (props: Props) => {
-  const [selectedLayer, setSelectedLayer] = React.useState<Layer>();
+  const [selectedLayers, setSelectedLayers] = React.useState<number[]>([]);
+
+  const unselectLayers = () => setSelectedLayers([]);
+
+  const changeLayer = (index: number) => (layer: Layer) => {
+    const newLayers = [...props.layers];
+    newLayers[index] = layer;
+    props.onLayersChange(newLayers);
+  };
 
   return (
     <React.Fragment>
@@ -28,7 +38,7 @@ export const LayersPanel = (props: Props) => {
               key={index}
               layer={layer}
               paperUnit={props.paperUnit}
-              onClick={() => setSelectedLayer(layer)}
+              onClick={() => setSelectedLayers([index])}
             />
           ))}
         </ol>
@@ -37,11 +47,16 @@ export const LayersPanel = (props: Props) => {
       <div
         className={classes(
           styles["selection-controls"],
-          selectedLayer && styles["selection-controls--active"]
+          selectedLayers.length != 0 && styles["selection-controls--active"]
         )}
       >
-        Selection Controls
-        <button onClick={() => setSelectedLayer(undefined)}>Unselect</button>
+        {selectedLayers.length == 1 ? (
+          <SingularControlPanel
+            layer={props.layers[selectedLayers[0]]}
+            changeLayer={changeLayer(selectedLayers[0])}
+            unselectLayers={unselectLayers}
+          />
+        ) : null}
       </div>
     </React.Fragment>
   );

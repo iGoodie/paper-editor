@@ -10,13 +10,13 @@ import { useFullscreen } from "../hooks/useFullscreen.hook";
 
 interface Props {
   viewportHeight: number;
-
   paperDimensions: { width: number; height: number };
   paperUnit: MeasurementUnit;
-  layers: Layer[];
 
   title?: string;
   paperBackground?: string;
+  layers: Layer[];
+  onLayersChange: (layers: Layer[]) => void;
 
   theme?: Theme;
 }
@@ -40,7 +40,11 @@ export const Editor = (props: Props) => {
   return (
     <div ref={editorRef} className={styles.editor} style={editorVars}>
       <div className={styles.editor__layers}>
-        <LayersPanel layers={props.layers} paperUnit={props.paperUnit} />
+        <LayersPanel
+          layers={props.layers}
+          onLayersChange={props.onLayersChange}
+          paperUnit={props.paperUnit}
+        />
       </div>
 
       <div ref={viewportRef} className={styles.editor__viewport}>
@@ -48,8 +52,8 @@ export const Editor = (props: Props) => {
       </div>
 
       <div className={styles.editor__rootactions}>
-        {mapRootActions(editorRef, (rootAction) => (
-          <button onClick={() => rootAction.onClick(editorRef)}>
+        {mapRootActions(editorRef, (rootAction, index) => (
+          <button key={index} onClick={() => rootAction.onClick(editorRef)}>
             {rootAction.renderIcon(editorRef)}
           </button>
         ))}

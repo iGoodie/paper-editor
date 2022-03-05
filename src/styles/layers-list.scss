@@ -20,6 +20,11 @@
     align-items: center;
     justify-content: center;
     background: var(--icon-background-color);
+
+    & > svg {
+      width: 30px;
+      height: 30px;
+    }
   }
 
   &__header {

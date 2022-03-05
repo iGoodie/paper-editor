@@ -1,5 +1,6 @@
 import React from "react";
 import { Layer } from "paper-editor";
+import { ReactComponent as Icon } from "../assets/icon/static-text-icon.svg";
 
 export class StaticTextLayer extends Layer {
   data: string = "";
@@ -9,7 +10,7 @@ export class StaticTextLayer extends Layer {
   }
 
   renderIcon(): React.ReactNode {
-    return <p>.txt</p>;
+    return <Icon />;
   }
 
   renderTypeText(): React.ReactNode {

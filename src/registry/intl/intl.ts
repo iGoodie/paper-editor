@@ -9,8 +9,8 @@ type PredefinedIntlKey =
   | "papereditor.unit.centimeters"
   | "papereditor.unit.millimeters";
 
-export type IntlMessages = Record<PredefinedIntlKey, React.ReactChild> &
-  Record<string, React.ReactChild>;
+export type IntlMessages = Record<PredefinedIntlKey, string> &
+  Record<string, string>;
 
 /* ------------------ */
 
