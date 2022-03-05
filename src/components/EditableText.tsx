@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/editable-text.scss";
 import { classes } from "../util/classes.util";
 import { ReactComponent as PencilIcon } from "../assets/icon/edit-pencil.svg";
+import { useEventListener } from "../hooks/useEventListener.hook";
 
 interface Props {
   className?: string;
@@ -16,24 +17,19 @@ export const EditableText = (props: Props) => {
 
   const [editable, setEditable] = React.useState(false);
 
-  React.useEffect(() => {
-    const makeEditable = () => {
-      setEditable(true);
-    };
-    const makeUneditable = () => {
-      if (document.activeElement != inputRef.current) {
-        setEditable(false);
-      }
-    };
-    spanRef.current?.addEventListener("mouseenter", makeEditable);
-    inputRef.current?.addEventListener("mouseleave", makeUneditable);
-    inputRef.current?.addEventListener("focusout", makeUneditable);
-    return () => {
-      spanRef.current?.removeEventListener("mouseenter", makeEditable);
-      inputRef.current?.removeEventListener("mouseleave", makeUneditable);
-      inputRef.current?.removeEventListener("focusout", makeUneditable);
-    };
+  const makeEditable = React.useCallback(() => {
+    setEditable(true);
   }, []);
+
+  const makeUneditable = React.useCallback(() => {
+    if (document.activeElement != inputRef.current) {
+      setEditable(false);
+    }
+  }, []);
+
+  useEventListener(spanRef.current, "mouseenter", makeEditable);
+  useEventListener(inputRef.current, "mouseleave", makeUneditable);
+  useEventListener(inputRef.current, "focusout", makeUneditable);
 
   return (
     <div className={classes(props.className, styles.container)}>

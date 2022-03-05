@@ -18,6 +18,7 @@
   width: 100%;
   display: flex;
   overflow-y: scroll;
+  overscroll-behavior: contain;
 
   color: #fff;
   background: #252525;

@@ -1,4 +1,5 @@
 import React from "react";
+import { MathUtils } from "../util/math.util";
 
 type Coordinate = { x: number; y: number };
 
@@ -13,6 +14,11 @@ export function useTransformation(
   const [grabbing, setGrabbing] = React.useState<boolean>(false);
   const [grabPos, setGrabPos] = React.useState<Coordinate>({ x: 0, y: 0 });
 
+  const zoom = (deltaScale: number) => {
+    const newScale = scale + deltaScale;
+    setScale(MathUtils.clamp(newScale, 0.1, 5));
+  };
+
   const centerView = () => {
     if (viewportRef.current == null) return;
     if (paperRef.current == null) return;
@@ -22,7 +28,6 @@ export function useTransformation(
     const paperHeight = paperRef.current.offsetHeight;
     const heightRatio = viewportHeight / paperHeight;
     const widthRatio = viewportWidth / paperWidth;
-    console.log(paperWidth);
     setScale(Math.min(heightRatio, widthRatio) * 0.75);
     setOffset({
       x: (viewportWidth - paperWidth) / 2,
@@ -44,6 +49,7 @@ export function useTransformation(
 
     // Functionalities
     centerView,
+    zoom,
   };
 }
 

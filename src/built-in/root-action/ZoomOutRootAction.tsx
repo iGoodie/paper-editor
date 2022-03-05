@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { RootAction } from "../../editor/RootAction";
 import { TransformationHook } from "../../hooks/useTransformation.hook";
-import { MathUtils } from "../../util/math.util";
 
 export class ZoomOutRootAction extends RootAction {
   isVisible(transformation: TransformationHook): boolean {
@@ -13,7 +12,6 @@ export class ZoomOutRootAction extends RootAction {
   }
 
   onClick(transformation: TransformationHook): void {
-    const newScale = transformation.scale - 0.1;
-    transformation.setScale(MathUtils.clamp(newScale, 0.1, 5));
+    transformation.zoom(-0.1);
   }
 }

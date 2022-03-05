@@ -9,6 +9,7 @@ import { mapRootActions } from "../registry/root-actions.registry";
 import { useFullscreen } from "../hooks/useFullscreen.hook";
 import { useTransformation } from "../hooks/useTransformation.hook";
 import { Canvas } from "./Canvas";
+import { useEventListener } from "../hooks/useEventListener.hook";
 
 interface Props {
   viewportHeight: number;

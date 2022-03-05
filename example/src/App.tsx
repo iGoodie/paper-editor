@@ -28,6 +28,22 @@ const App = () => {
       layerName: "Sooooo long to fit here lmao",
       data: "Hey there!",
     }),
+    new StaticTextLayer().deserialize({
+      layerName: "Sooooo long to fit here lmao",
+      data: "Hey there!",
+    }),
+    new StaticTextLayer().deserialize({
+      layerName: "Sooooo long to fit here lmao",
+      data: "Hey there!",
+    }),
+    new StaticTextLayer().deserialize({
+      layerName: "Sooooo long to fit here lmao",
+      data: "Hey there!",
+    }),
+    new StaticTextLayer().deserialize({
+      layerName: "Sooooo long to fit here lmao",
+      data: "Hey there!",
+    }),
   ]);
 
   return (
