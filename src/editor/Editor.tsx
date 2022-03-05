@@ -10,10 +10,11 @@ import { useFullscreen } from "../hooks/useFullscreen.hook";
 import { useTransformation } from "../hooks/useTransformation.hook";
 import { Canvas } from "./Canvas";
 import { useEventListener } from "../hooks/useEventListener.hook";
+import { MapScale } from "../components/MapScale";
 
 interface Props {
   viewportHeight: number;
-  paperDimensions: { width: number; height: number };
+  paperDimensions: { width: number; height: number }; // in paperUnits
   paperUnit: MeasurementUnit;
 
   title?: string;
@@ -36,6 +37,9 @@ export const Editor = (props: Props) => {
   const editorVars = useInlineStyle(
     () => ({
       "--viewport-height": props.viewportHeight + "px",
+      "--viewport-scale": transformations.scale,
+      "--viewport-offset-x": transformations.offset.x + "px",
+      "--viewport-offset-y": transformations.offset.y + "px",
       "--paper-width":
         props.paperUnit.toPixels(props.paperDimensions.width) + "px",
       "--paper-height":
@@ -44,7 +48,17 @@ export const Editor = (props: Props) => {
         props.paperBackground || "linear-gradient(180deg,#fff,#e8e8e8)",
       ...(props.theme ? themeToCssVars(props.theme) : {}),
     }),
-    [props.viewportHeight, props.theme]
+    [
+      props.viewportHeight,
+      transformations.scale,
+      transformations.offset.x,
+      transformations.offset.y,
+      props.paperDimensions.width,
+      props.paperDimensions.height,
+      props.paperBackground,
+      props.paperUnit,
+      props.theme,
+    ]
   );
 
   React.useEffect(() => {
@@ -83,6 +97,13 @@ export const Editor = (props: Props) => {
           </button>
         ))}
       </div>
+
+      <MapScale
+        width={100}
+        className={styles.editor__mapscale}
+        transformations={transformations}
+        paperUnit={props.paperUnit}
+      />
     </div>
   );
 };

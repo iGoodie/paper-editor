@@ -11,12 +11,18 @@ export class MeasurementUnit {
     return value * this.ratio;
   }
 
-  fromMillimeters(value: number) {
-    return value / this.ratio;
+  fromMillimeters(millimeterValue: number) {
+    return millimeterValue / this.ratio;
   }
 
   toPixels(value: number) {
     return this.toMillimeters(value) * configurations.millimeterToPixelRatio;
+  }
+
+  fromPixels(pixelValue: number) {
+    return this.fromMillimeters(
+      pixelValue / configurations.millimeterToPixelRatio
+    );
   }
 }
 

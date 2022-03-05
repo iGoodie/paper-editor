@@ -24,6 +24,9 @@
     background-color: var(--canvas-background-color);
     background-image: var(--canvas-background-image);
     background-repeat: repeat;
+    background-position-x: var(--viewport-offset-x);
+    background-position-y: var(--viewport-offset-y);
+    background-size: calc(100px * var(--viewport-scale));
     overflow: hidden;
   }
 
@@ -52,6 +55,12 @@
         height: 32px;
       }
     }
+  }
+
+  &__mapscale {
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
 
   &::after {

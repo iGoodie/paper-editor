@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "../styles/canvas.scss";
 import { MeasurementUnit } from "..";
-import { useTransformation } from "../hooks/useTransformation.hook";
+import { TransformationHook } from "../hooks/useTransformation.hook";
 import { useEventListener } from "../hooks/useEventListener.hook";
 
 interface Props {
-  transformations: ReturnType<typeof useTransformation>;
+  transformations: TransformationHook;
   paperDimensions: { width: number; height: number };
   paperUnit: MeasurementUnit;
   title?: string;
@@ -46,9 +46,8 @@ export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
       >
         <h1>{props.title || "Untitled Document"}</h1>
         <h2>
-          {props.paperUnit.fromMillimeters(props.paperDimensions.width) ?? 0} x{" "}
-          {props.paperUnit.fromMillimeters(props.paperDimensions.height) ?? 0}{" "}
-          {props.paperUnit.abbr}
+          {props.paperDimensions.width ?? 0} x{" "}
+          {props.paperDimensions.height ?? 0} {props.paperUnit.abbr}
         </h2>
       </div>
     </div>
