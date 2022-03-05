@@ -1,0 +1,35 @@
+.editor {
+  position: relative;
+  display: flex;
+  height: var(--viewport-height);
+  border-radius: 20px;
+  overflow: hidden;
+
+  & * {
+    box-sizing: border-box;
+  }
+
+  &__layers {
+    width: 350px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  &__viewport {
+    flex-grow: 1;
+    background-color: var(--canvas-background-color);
+    background-image: var(--canvas-background-image);
+    background-repeat: repeat;
+  }
+
+  &::after {
+    box-shadow: inset 0 0 50px rgba(#000, 25%);
+    content: "";
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+  }
+}

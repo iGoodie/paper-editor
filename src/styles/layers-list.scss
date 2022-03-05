@@ -1,0 +1,44 @@
+.item {
+  padding: 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  align-items: center;
+  column-gap: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: #464646;
+  }
+
+  &__icon {
+    grid-row: 1 / span 2;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--icon-background-color);
+  }
+
+  &__header {
+    margin: 0;
+    font-size: 14px;
+    & > :first-child {
+      color: var(--layertext-secondary-color);
+    }
+    & > :last-child {
+      color: var(--layertext-secondary-color);
+      opacity: 0.5;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

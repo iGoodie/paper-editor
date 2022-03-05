@@ -1,0 +1,36 @@
+@use "_mixins";
+
+.header {
+  height: 65px;
+  padding: 0 20px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  background-color: var(--header-background-color);
+
+  & > h1 {
+    margin: 0;
+    color: var(--header-text-color);
+    font-family: var(--header-font);
+    font-weight: 300;
+    font-size: 24px;
+  }
+}
+
+.content {
+  @include mixins.customScroll;
+
+  width: 100%;
+  display: flex;
+  overflow-y: scroll;
+
+  color: #fff;
+  background: #252525;
+
+  &__list {
+    list-style: none;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+  }
+}
