@@ -26,4 +26,12 @@ declare module "*.svg" {
   export { svgComponent as ReactComponent };
 }
 
+declare interface Class<T> {
+  new (...args: any): T;
+}
+
+declare type PropertiesOnly<T> = Partial<
+  Pick<T, { [K in keyof T]: T[K] extends Function ? never : K }[keyof T]>
+>;
+
 declare type Supplier<T> = () => T;

@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "../styles/editor.scss";
-import { Theme, themeToCssVars } from "./Theme";
+import { Theme, themeToCssVars } from "../styles/Theme";
 import { useInlineStyle } from "../hooks/useInlineStyle.hook";
 import { LayersPanel } from "./LayersPanel";
-import { Layer } from "./Layer";
+import { Layer, SerializedLayer } from "./base/Layer";
 import { MeasurementUnit } from "../util/units.util";
 import { mapRootActions } from "../registry/root-actions.registry";
 import { useFullscreen } from "../hooks/useFullscreen.hook";
@@ -11,6 +11,7 @@ import { useTransformation } from "../hooks/useTransformation.hook";
 import { Canvas } from "./Canvas";
 import { useEventListener } from "../hooks/useEventListener.hook";
 import { MapScale } from "../components/MapScale";
+import { useLayers } from "../hooks/useLayers.hook";
 
 interface Props {
   viewportHeight: number;
@@ -19,8 +20,8 @@ interface Props {
 
   title?: string;
   paperBackground?: string;
-  layers: Layer[];
-  onLayersChange: (layers: Layer[]) => void;
+  layers: SerializedLayer[];
+  onLayersChange: (layers: SerializedLayer[]) => void;
 
   theme?: Theme;
 }
@@ -29,6 +30,8 @@ export const Editor = (props: Props) => {
   const editorRef = React.useRef<HTMLDivElement>(null);
   const viewportRef = React.useRef<HTMLDivElement>(null);
   const paperRef = React.useRef<HTMLDivElement>(null);
+
+  const layers = useLayers(props.layers, props.onLayersChange);
 
   const transformations = useTransformation(editorRef, viewportRef, paperRef);
 
@@ -65,16 +68,12 @@ export const Editor = (props: Props) => {
     transformations.centerView();
   }, [fullscreen.active]);
 
-  console.log(props.layers.map((layer) => layer.serialize()));
+  // console.log({ editorLayers: layers.list.map((layer) => layer.serialize()) });
 
   return (
     <div ref={editorRef} className={styles.editor} style={editorVars}>
       <div className={styles.editor__layers}>
-        <LayersPanel
-          layers={props.layers}
-          onLayersChange={props.onLayersChange}
-          paperUnit={props.paperUnit}
-        />
+        <LayersPanel layers={layers} paperUnit={props.paperUnit} />
       </div>
 
       <div ref={viewportRef} className={styles.editor__viewport}>
@@ -88,7 +87,7 @@ export const Editor = (props: Props) => {
       </div>
 
       <div className={styles.editor__rootactions}>
-        {mapRootActions(editorRef, (rootAction, index) => (
+        {mapRootActions(transformations, (rootAction, index) => (
           <button
             key={index}
             onClick={() => rootAction.onClick(transformations)}

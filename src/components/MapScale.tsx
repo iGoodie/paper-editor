@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "../styles/map-scale.scss";
 import { MeasurementUnit } from "..";
-import { TransformationHook } from "../hooks/useTransformation.hook";
+import { Transformations } from "../hooks/useTransformation.hook";
 import { ReactComponent as ScaleShape } from "../assets/icon/map-scale.svg";
 import { classes } from "../util/classes.util";
 
 interface Props {
   className?: string;
   width: number;
-  transformations: TransformationHook;
+  transformations: Transformations;
   paperUnit: MeasurementUnit;
 }
 

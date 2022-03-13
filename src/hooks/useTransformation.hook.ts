@@ -43,9 +43,11 @@ export function useTransformation(
     setScale,
 
     // Refs
-    editorRef,
-    viewportRef,
-    paperRef,
+    refs: {
+      editor: editorRef,
+      viewport: viewportRef,
+      paper: paperRef,
+    },
 
     // Functionalities
     centerView,
@@ -53,4 +55,4 @@ export function useTransformation(
   };
 }
 
-export type TransformationHook = ReturnType<typeof useTransformation>;
+export type Transformations = ReturnType<typeof useTransformation>;

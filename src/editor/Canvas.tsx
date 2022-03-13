@@ -1,18 +1,18 @@
 import React from "react";
 import styles from "../styles/canvas.scss";
 import { MeasurementUnit } from "..";
-import { TransformationHook } from "../hooks/useTransformation.hook";
+import { Transformations } from "../hooks/useTransformation.hook";
 import { useEventListener } from "../hooks/useEventListener.hook";
 
 interface Props {
-  transformations: TransformationHook;
+  transformations: Transformations;
   paperDimensions: { width: number; height: number };
   paperUnit: MeasurementUnit;
   title?: string;
 }
 
 export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const viewportRef = props.transformations.viewportRef;
+  const viewportRef = props.transformations.refs.viewport;
 
   const onMouseWheel = (event: WheelEvent) => {
     event.preventDefault();

@@ -1,17 +1,17 @@
 import React, {  ReactNode } from "react";
-import { RootAction } from "../../editor/RootAction";
-import { TransformationHook } from "../../hooks/useTransformation.hook";
+import { RootAction } from "../../editor/base/RootAction";
+import { Transformations } from "../../hooks/useTransformation.hook";
 
 export class ZoomCenterRootAction extends RootAction {
-  isVisible(transformation: TransformationHook): boolean {
+  isVisible(transformation: Transformations): boolean {
     return true;
   }
 
-  renderIcon(transformation: TransformationHook): ReactNode {
+  renderIcon(transformation: Transformations): ReactNode {
     return <p>C</p>;
   }
 
-  onClick(transformation: TransformationHook): void {
+  onClick(transformation: Transformations): void {
     transformation.centerView();
   }
 }

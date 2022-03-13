@@ -1,9 +1,9 @@
 import React from "react";
-import { Layer } from "paper-editor";
+import { Layer, SerializedLayer } from "paper-editor";
 import { ReactComponent as Icon } from "../assets/icon/static-text-icon.svg";
 
 export class StaticTextLayer extends Layer {
-  data: string = "";
+  data?: string = "";
 
   getType(): string {
     return "static-text";
@@ -28,7 +28,7 @@ export class StaticTextLayer extends Layer {
     };
   }
 
-  deserialize(serialized: Partial<Record<keyof StaticTextLayer, any>>): this {
+  deserialize(serialized: SerializedLayer<StaticTextLayer>): this {
     super.deserialize(serialized);
     this.data = serialized.data;
     return this;

@@ -6,24 +6,14 @@ import { getIntlMessage } from "../registry/intl/intl";
 import { LayerItem } from "./LayerItem";
 import { classes } from "../util/classes.util";
 import { SingularControlPanel } from "./SingularControlPanel";
+import { Layers } from "../hooks/useLayers.hook";
 
 interface Props {
-  layers: Layer[];
-  onLayersChange: (layers: Layer[]) => void;
+  layers: Layers;
   paperUnit: MeasurementUnit;
 }
 
 export const LayersPanel = (props: Props) => {
-  const [selectedLayers, setSelectedLayers] = React.useState<number[]>([]);
-
-  const unselectLayers = () => setSelectedLayers([]);
-
-  const changeLayer = (index: number) => (layer: Layer) => {
-    const newLayers = [...props.layers];
-    newLayers[index] = layer;
-    props.onLayersChange(newLayers);
-  };
-
   return (
     <React.Fragment>
       <div className={styles.header}>
@@ -33,12 +23,12 @@ export const LayersPanel = (props: Props) => {
 
       <div className={styles.content}>
         <ol className={styles.content__list}>
-          {props.layers.map((layer, index) => (
+          {props.layers.list.map((layer, index) => (
             <LayerItem
               key={index}
               layer={layer}
               paperUnit={props.paperUnit}
-              onClick={() => setSelectedLayers([index])}
+              onClick={() => props.layers.selectLayers(index)}
             />
           ))}
         </ol>
@@ -47,25 +37,21 @@ export const LayersPanel = (props: Props) => {
       <div
         className={classes(
           styles["selection-controls"],
-          selectedLayers.length == 1 && styles["selection-controls--active"]
+          props.layers.singularSelected && styles["selection-controls--active"]
         )}
       >
-        {selectedLayers.length == 1 && (
-          <SingularControlPanel
-            layer={props.layers[selectedLayers[0]]}
-            changeLayer={changeLayer(selectedLayers[0])}
-            unselectLayers={unselectLayers}
-          />
+        {props.layers.singularSelected && (
+          <SingularControlPanel layers={props.layers} />
         )}
       </div>
 
       <div
         className={classes(
           styles["selection-controls"],
-          selectedLayers.length == 2 && styles["selection-controls--active"]
+          props.layers.multipleSelected && styles["selection-controls--active"]
         )}
       >
-        Foo
+        Multiple items selected
       </div>
     </React.Fragment>
   );
