@@ -79,6 +79,7 @@ export const Editor = (props: Props) => {
       <div ref={viewportRef} className={styles.editor__viewport}>
         <Canvas
           ref={paperRef}
+          layers={layers}
           transformations={transformations}
           paperDimensions={props.paperDimensions}
           paperUnit={props.paperUnit}

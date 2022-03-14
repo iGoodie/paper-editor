@@ -23,10 +23,20 @@ const App = () => {
       height: 200,
     }),
     paperEditor.Layer.createSerialized(StaticTextLayer, {
-      x: 100,
+      x: 10,
       y: 10,
       width: 300,
       height: 400,
+      layerName: "Yo hey there!",
+      data: "Yo hey there!",
+    }),
+    paperEditor.Layer.createSerialized(StaticTextLayer, {
+      x: 10,
+      y: 30,
+      width: 300,
+      height: 400,
+      layerName: "Yo hey there!",
+      data: "Yo hey there!",
     }),
     // paperEditor.Layer.createSerialized(StaticTextLayer, {
     //   layerName: "A very static name",

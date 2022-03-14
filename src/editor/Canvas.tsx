@@ -3,8 +3,11 @@ import styles from "../styles/canvas.scss";
 import { MeasurementUnit } from "..";
 import { Transformations } from "../hooks/useTransformation.hook";
 import { useEventListener } from "../hooks/useEventListener.hook";
+import { Layers } from "../hooks/useLayers.hook";
+import { CanvasItem } from "./CanvasItem";
 
 interface Props {
+  layers: Layers;
   transformations: Transformations;
   paperDimensions: { width: number; height: number };
   paperUnit: MeasurementUnit;
@@ -21,7 +24,54 @@ export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
     props.transformations.zoom(delta * 0.1);
   };
 
+  const onMouseUp = (event: MouseEvent) => {
+    if (event.button === 1 /* Mid-click */) {
+      // Stop grabbing if grabbing
+    }
+  };
+
+  const onMouseDown = (event: MouseEvent) => {
+    event.preventDefault();
+
+    if (event.button === 0 /* Left-click */) {
+      const canvasItem = (event.target as HTMLElement).closest<HTMLDivElement>(
+        "[data-layerindex]"
+      );
+
+      if (!canvasItem) {
+        props.layers.unselectAll();
+        return;
+      }
+
+      const layerIndex = parseInt(canvasItem.dataset.layerindex || "-1");
+
+      if (event.shiftKey) {
+        if (props.layers.selectedLayerIndices.includes(layerIndex)) {
+          return props.layers.unselectLayer(layerIndex);
+        }
+
+        return props.layers.selectLayers(
+          ...props.layers.selectedLayerIndices,
+          layerIndex
+        );
+      }
+
+      return props.layers.selectLayers(layerIndex);
+    }
+
+    if (event.button === 1 /* Mid-click */) {
+      // Grab clicked point
+    }
+  };
+
+  const disableAction = (event: MouseEvent) => {
+    event.preventDefault();
+  };
+
   useEventListener(viewportRef, "wheel", onMouseWheel);
+  useEventListener(viewportRef, "mouseup", onMouseUp);
+  useEventListener(viewportRef, "mousedown", onMouseDown);
+  useEventListener(viewportRef, "contextmenu", disableAction);
 
   return (
     <div
@@ -34,7 +84,16 @@ export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         ].join(" "),
       }}
     >
-      <div ref={ref} className={styles.paper}></div>
+      <div ref={ref} className={styles.paper}>
+        {props.layers.list.map((layer, index) => (
+          <CanvasItem
+            index={index}
+            layer={layer}
+            layers={props.layers}
+            transformations={props.transformations}
+          />
+        ))}
+      </div>
 
       <div
         className={styles.manifest}

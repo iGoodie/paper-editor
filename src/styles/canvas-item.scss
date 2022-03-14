@@ -1,0 +1,16 @@
+.outter {
+  $outline-width: 4px;
+
+  position: absolute;
+  user-select: none;
+  transform: translateX(var(--x)) translateY(var(--y));
+
+  &:not(&--selected):hover {
+    outline: calc($outline-width / var(--scale)) dashed #18a0fb;
+    outline-offset: -1px;
+  }
+
+  &--selected {
+    outline: calc($outline-width / var(--scale)) solid #18a0fb;
+  }
+}

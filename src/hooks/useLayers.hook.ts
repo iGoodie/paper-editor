@@ -14,10 +14,7 @@ export function useLayers(
   };
 
   const unselectLayer = (layerIndex: number) => {
-    const selectionIndex = selectedIndices.findIndex((i) => i === layerIndex);
-    if (selectionIndex != -1) {
-      setSelectedIndices(selectedIndices.filter((i) => i !== selectionIndex));
-    }
+    setSelectedIndices(selectedIndices.filter((i) => i !== layerIndex));
   };
 
   const unselectAll = () => setSelectedIndices([]);
@@ -36,6 +33,7 @@ export function useLayers(
 
   return {
     list: layers,
+    selectedLayerIndices: selectedIndices,
     selectedLayers: selectedIndices.map((i) => layers[i]),
     singularSelected: selectedIndices.length === 1,
     multipleSelected: selectedIndices.length > 1,

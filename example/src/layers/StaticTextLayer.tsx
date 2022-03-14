@@ -24,7 +24,7 @@ export class StaticTextLayer extends Layer {
   }
 
   renderCanvas(): React.ReactNode {
-    throw new Error("Method not implemented.");
+    return <p style={{ margin: 0 }}>{this.data}</p>;
   }
 
   renderControls(layer: StaticTextLayer, layers: Layers): React.ReactFragment {
