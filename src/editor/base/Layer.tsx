@@ -1,4 +1,5 @@
 import React from "react";
+import { Layers } from "../../hooks/useLayers.hook";
 import { getLayerType } from "../../registry/layers.registry";
 
 export type SerializedLayer<T = any> = { type: string } & PropertiesOnly<T>;
@@ -17,6 +18,8 @@ export abstract class Layer {
   abstract renderTypeText(): React.ReactNode;
 
   abstract renderCanvas(): React.ReactNode;
+
+  abstract renderControls(layer: Layer, layers: Layers): React.ReactFragment;
 
   serialize(): SerializedLayer<Layer> {
     return {

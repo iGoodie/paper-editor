@@ -1,0 +1,54 @@
+.accordion {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+
+  &__header {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+
+    &:hover {
+      background: rgba(#fff, 0.1);
+    }
+
+    & > svg:first-of-type {
+      transition: 150ms;
+    }
+  }
+
+  &__content {
+    height: auto;
+    flex-basis: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: flex 200ms;
+
+    &__inner {
+      margin: 10px;
+      color: #fff;
+    }
+  }
+
+  &--open {
+    background: #1b1b1b;
+  }
+
+  &--open > &__header {
+    & > svg:first-of-type {
+      transform: rotate(90deg);
+    }
+  }
+
+  &--open > &__content {
+    flex: 1;
+  }
+}

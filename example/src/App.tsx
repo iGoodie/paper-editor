@@ -1,4 +1,5 @@
 import React from "react";
+import ReactJson from "react-json-view";
 
 import { StaticTextLayer } from "./layers/StaticTextLayer";
 
@@ -20,6 +21,12 @@ const App = () => {
     paperEditor.Layer.createSerialized(StaticTextLayer, {
       width: 100,
       height: 200,
+    }),
+    paperEditor.Layer.createSerialized(StaticTextLayer, {
+      x: 100,
+      y: 10,
+      width: 300,
+      height: 400,
     }),
     // paperEditor.Layer.createSerialized(StaticTextLayer, {
     //   layerName: "A very static name",
@@ -61,13 +68,21 @@ const App = () => {
         viewportHeight={500}
         theme={theme}
       />
-      <Editor
+
+      {/* <Editor
         layers={layers}
         onLayersChange={setLayers}
         paperUnit={getUnitByName("meters")}
         paperDimensions={{ width: 0.061, height: 0.11 }}
         viewportHeight={800}
         theme={theme}
+      /> */}
+
+      <ReactJson
+        style={{ padding: 15, borderRadius: 10 }}
+        name={"layers"}
+        theme="summerfruit"
+        src={layers}
       />
     </div>
   );

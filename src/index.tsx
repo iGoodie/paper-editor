@@ -20,7 +20,14 @@ export { Theme } from "./styles/Theme";
 
 // Components
 export { Editor } from "./editor/Editor";
+export { Layers } from "./hooks/useLayers.hook";
+export { Transformations } from "./hooks/useTransformation.hook";
 export { Layer, SerializedLayer } from "./editor/base/Layer";
+
+// Controls
+export { AccordionControl } from "./editor/controls/AccordionControl";
+export { AlignControls } from "./editor/controls/AlignControls";
+export * as ButtonStripeControl from "./editor/controls/ButtonStripeControl";
 
 // ---- Built-in Registrations ---- //
 

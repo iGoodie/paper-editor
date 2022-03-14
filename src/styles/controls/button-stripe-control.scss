@@ -1,0 +1,18 @@
+.stripe {
+  padding: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.button {
+  padding: 5px;
+  border: none;
+  background: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(#fff, 0.1);
+  }
+}

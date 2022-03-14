@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/control-panels.scss";
-import { Layer } from "..";
 import { getIntlMessage } from "../registry/intl/intl";
 import { ReactComponent as CloseIcon } from "../assets/icon/close.svg";
 import { ReactComponent as SelectionBoxIcon } from "../assets/icon/selection-box.svg";
@@ -41,7 +40,9 @@ export const SingularControlPanel = (props: Props) => {
         </button>
       </div>
 
-      <div className={styles.panel__content}>Content</div>
+      <div className={styles.panel__content}>
+        {selectedLayer.renderControls(selectedLayer, props.layers)}
+      </div>
     </div>
   );
 };

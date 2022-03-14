@@ -1,6 +1,7 @@
 .editor {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   height: var(--viewport-height);
   border-radius: 20px;
   overflow: hidden;
