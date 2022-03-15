@@ -36,6 +36,7 @@ const App = () => {
       width: 300,
       height: 400,
       layerName: "Yo hey there!",
+      fontSize: 5,
       data: "Yo hey there!",
     }),
     // paperEditor.Layer.createSerialized(StaticTextLayer, {

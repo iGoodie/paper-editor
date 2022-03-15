@@ -44,7 +44,7 @@ export const Editor = (props: EditorProps) => {
           </div>
 
           <div className={styles.editor__rootactions}>
-            {mapRootActions(ctx.transformations, (rootAction, index) => (
+            {mapRootActions(ctx, (rootAction, index) => (
               <RootActionButton key={index} rootAction={rootAction} />
             ))}
           </div>

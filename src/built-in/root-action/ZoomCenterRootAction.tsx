@@ -1,17 +1,14 @@
-import React, {  ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { RootAction } from "../../editor/base/RootAction";
-import { Transformations } from "../../hooks/useTransformation.hook";
+import { ReactComponent as Icon } from "../../assets/icon/center-view.svg";
+import { IEditorContext } from "../../context/EditorContext";
 
 export class ZoomCenterRootAction extends RootAction {
-  isVisible(transformation: Transformations): boolean {
-    return true;
+  renderIcon(ctx: IEditorContext): ReactNode {
+    return <Icon />;
   }
 
-  renderIcon(transformation: Transformations): ReactNode {
-    return <p>C</p>;
-  }
-
-  onClick(transformation: Transformations): void {
-    transformation.centerView();
+  onClick(ctx: IEditorContext): void {
+    ctx.transformations.centerView();
   }
 }

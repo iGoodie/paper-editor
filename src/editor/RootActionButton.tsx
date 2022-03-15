@@ -10,8 +10,8 @@ export const RootActionButton = (props: Props) => {
   const ctx = useEditorContext();
 
   return (
-    <button onClick={() => props.rootAction.onClick(ctx.transformations)}>
-      {props.rootAction.renderIcon(ctx.transformations)}
+    <button onClick={() => props.rootAction.onClick(ctx)}>
+      {props.rootAction.renderIcon(ctx)}
     </button>
   );
 };

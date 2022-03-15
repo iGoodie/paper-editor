@@ -39,6 +39,7 @@ registerUnit(defaultUnit);
 registerUnit(new MeasurementUnit("centimeters", "cm", 10));
 registerUnit(new MeasurementUnit("meters", "m", 1000));
 registerUnit(new MeasurementUnit("inches", "inch", 25.4));
+registerUnit(new MeasurementUnit("points", "pt", 0.352778));
 
 export function getUnitByName(name: string) {
   return unitsByName.get(name) ?? defaultUnit;

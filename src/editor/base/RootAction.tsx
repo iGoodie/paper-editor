@@ -1,10 +1,12 @@
 import React from "react";
-import { Transformations } from "../../hooks/useTransformation.hook";
+import { IEditorContext } from "../../context/EditorContext";
 
 export abstract class RootAction {
-  abstract isVisible(transformation: Transformations): boolean;
+  isVisible(ctx: IEditorContext): boolean {
+    return true;
+  }
 
-  abstract renderIcon(transformation: Transformations): React.ReactNode;
+  abstract renderIcon(ctx: IEditorContext): React.ReactNode;
 
-  abstract onClick(transformation: Transformations): void;
+  abstract onClick(ctx: IEditorContext): void;
 }

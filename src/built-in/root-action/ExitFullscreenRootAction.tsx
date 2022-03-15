@@ -3,20 +3,20 @@ import { RootAction } from "../../editor/base/RootAction";
 import { exitFullscreen } from "../../util/fullscreen.util";
 import { isFullscreenActive } from "../../util/fullscreen.util";
 import { ReactComponent as Icon } from "../../assets/icon/exit-fullscreen.svg";
-import { Transformations } from "../../hooks/useTransformation.hook";
+import { IEditorContext } from "../../context/EditorContext";
 
 export class ExitFullscreenRootAction extends RootAction {
-  isVisible(transformation: Transformations): boolean {
+  isVisible(ctx: IEditorContext): boolean {
     return isFullscreenActive();
   }
 
-  renderIcon(transformation: Transformations): ReactNode {
+  renderIcon(ctx: IEditorContext): ReactNode {
     return <Icon />;
   }
 
-  onClick(transformation: Transformations): void {
-    if (transformation.refs.editor.current != null) {
-      exitFullscreen(transformation.refs.editor.current);
+  onClick(ctx: IEditorContext): void {
+    if (ctx.refs.editorRef.current != null) {
+      exitFullscreen(ctx.refs.editorRef.current);
     }
   }
 }
