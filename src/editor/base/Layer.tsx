@@ -1,6 +1,10 @@
 import React from "react";
-import { Layers } from "../../hooks/useLayers.hook";
+import { IEditorContext } from "../../context/EditorContext";
 import { getLayerType } from "../../registry/layers.registry";
+
+export type PropertiesOnly<T> = Partial<
+  Pick<T, { [K in keyof T]: T[K] extends Function ? never : K }[keyof T]>
+>;
 
 export type SerializedLayer<T = any> = { type: string } & PropertiesOnly<T>;
 
@@ -13,13 +17,13 @@ export abstract class Layer {
 
   abstract getType(): string;
 
-  abstract renderIcon(): React.ReactNode;
+  abstract renderIcon(ctx: IEditorContext): React.ReactNode;
 
-  abstract renderTypeText(): React.ReactNode;
+  abstract renderTypeText(ctx: IEditorContext): React.ReactNode;
 
-  abstract renderCanvas(): React.ReactNode;
+  abstract renderCanvas(ctx: IEditorContext): React.ReactNode;
 
-  abstract renderControls(layer: Layer, layers: Layers): React.ReactFragment;
+  abstract renderControls(ctx: IEditorContext): React.ReactFragment;
 
   serialize(): SerializedLayer<Layer> {
     return {
@@ -49,7 +53,7 @@ export abstract class Layer {
     return { type: sample.getType(), ...serialized };
   }
 
-  static create(serialized: SerializedLayer) {
+  static create(serialized: SerializedLayer<Layer>) {
     const LayerType = getLayerType(serialized.type);
     if (!LayerType) throw new Error("Unknown layer type = " + serialized.type);
     return new LayerType().deserialize(serialized);

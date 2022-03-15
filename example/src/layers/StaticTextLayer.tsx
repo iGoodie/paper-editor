@@ -3,13 +3,15 @@ import {
   AccordionControl,
   AlignControls,
   Layer,
-  Layers,
   SerializedLayer,
+  getUnitByAbbr,
+  IEditorContext,
 } from "paper-editor";
 import { ReactComponent as Icon } from "../assets/icon/static-text-icon.svg";
 
 export class StaticTextLayer extends Layer {
   data?: string = "";
+  fontSize?: number; // in millimeters
 
   getType(): string {
     return "static-text";
@@ -23,11 +25,20 @@ export class StaticTextLayer extends Layer {
     return "Static Text";
   }
 
-  renderCanvas(): React.ReactNode {
-    return <p style={{ margin: 0 }}>{this.data}</p>;
+  renderCanvas(ctx: IEditorContext): React.ReactNode {
+    return (
+      <p
+        style={{
+          margin: 0,
+          fontSize: getUnitByAbbr("mm").toPixels(this.fontSize || 10) + "px",
+        }}
+      >
+        {this.data}
+      </p>
+    );
   }
 
-  renderControls(layer: StaticTextLayer, layers: Layers): React.ReactFragment {
+  renderControls(ctx: IEditorContext): React.ReactFragment {
     return (
       <>
         <p style={{ padding: 10, margin: 0, color: "#fff" }}>
@@ -35,7 +46,7 @@ export class StaticTextLayer extends Layer {
           ut ad minus fuga velit cupiditate.
         </p>
 
-        <AlignControls layers={layers} />
+        <AlignControls layers={ctx.layers} />
 
         <AccordionControl header={"Header here!"}>
           Hey, content here! <br />
@@ -66,12 +77,14 @@ export class StaticTextLayer extends Layer {
     return {
       ...super.serialize(),
       data: this.data,
+      fontSize: this.fontSize,
     };
   }
 
   deserialize(serialized: SerializedLayer<StaticTextLayer>): this {
     super.deserialize(serialized);
     this.data = serialized.data;
+    this.fontSize = serialized.fontSize;
     return this;
   }
 }

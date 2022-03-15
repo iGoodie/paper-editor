@@ -1,21 +1,19 @@
 import React from "react";
 import styles from "../styles/canvas-item.scss";
 import { Layer } from "./base/Layer";
-import { Layers } from "../hooks/useLayers.hook";
-import { Transformations } from "../hooks/useTransformation.hook";
 import { classes } from "../util/classes.util";
 import { useInlineStyle } from "../hooks/useInlineStyle.hook";
-import { getUnitByAbbr, MeasurementUnit } from "../util/units.util";
+import { getUnitByAbbr } from "../util/units.util";
+import { useEditorContext } from "../context/EditorContext";
 
 interface Props {
   index: number;
   layer: Layer;
-  layers: Layers;
-  transformations: Transformations;
 }
 
 export const CanvasItem = (props: Props) => {
-  const selected = props.layers.selectedLayers.includes(props.layer);
+  const ctx = useEditorContext();
+  const selected = ctx.layers.selectedLayers.includes(props.layer);
 
   const outterStyles = useInlineStyle(
     () => ({
@@ -23,14 +21,14 @@ export const CanvasItem = (props: Props) => {
       "--y": getUnitByAbbr("mm").toPixels(props.layer.y) + "px",
       "--width": props.layer.width,
       "--height": props.layer.height,
-      "--scale": props.transformations.scale,
+      "--scale": ctx.transformations.scale,
     }),
     [
       props.layer.x,
       props.layer.y,
       props.layer.width,
       props.layer.height,
-      props.transformations.scale,
+      ctx.transformations.scale,
     ]
   );
 
@@ -40,7 +38,7 @@ export const CanvasItem = (props: Props) => {
       className={classes(styles.outter, selected && styles["outter--selected"])}
       style={outterStyles}
     >
-      {props.layer.renderCanvas()}
+      {props.layer.renderCanvas(ctx)}
     </div>
   );
 };

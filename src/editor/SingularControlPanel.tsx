@@ -4,25 +4,22 @@ import { getIntlMessage } from "../registry/intl/intl";
 import { ReactComponent as CloseIcon } from "../assets/icon/close.svg";
 import { ReactComponent as SelectionBoxIcon } from "../assets/icon/selection-box.svg";
 import { EditableText } from "../components/EditableText";
-import { Layers } from "../hooks/useLayers.hook";
+import { useEditorContext } from "../context/EditorContext";
 
-interface Props {
-  layers: Layers;
-}
-
-export const SingularControlPanel = (props: Props) => {
-  const selectedLayer = props.layers.selectedLayers[0];
+export const SingularControlPanel = () => {
+  const ctx = useEditorContext();
+  const selectedLayer = ctx.layers.selectedLayers[0];
 
   const renameLayerName = (newName: string) => {
     selectedLayer.layerName = newName;
-    props.layers.updateLayers();
+    ctx.layers.updateLayers();
   };
 
   return (
     <div className={styles.panel}>
       <div className={styles.panel__header}>
         <div className={styles.panel__header__icon}>
-          {selectedLayer.renderIcon()}
+          {selectedLayer.renderIcon(ctx)}
           <SelectionBoxIcon />
         </div>
         <h2 className={styles.panel__header__desc}>Selected Layer</h2>
@@ -34,14 +31,14 @@ export const SingularControlPanel = (props: Props) => {
         />
         <button
           className={styles.panel__header__unselect}
-          onClick={props.layers.unselectAll}
+          onClick={ctx.layers.unselectAll}
         >
           <CloseIcon />
         </button>
       </div>
 
       <div className={styles.panel__content}>
-        {selectedLayer.renderControls(selectedLayer, props.layers)}
+        {selectedLayer.renderControls(ctx)}
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ export { messagesTr } from "./registry/intl/intl.tr";
 export { Theme } from "./styles/Theme";
 
 // Components
+export { IEditorContext } from "./context/EditorContext";
 export { Editor } from "./editor/Editor";
 export { Layers } from "./hooks/useLayers.hook";
 export { Transformations } from "./hooks/useTransformation.hook";

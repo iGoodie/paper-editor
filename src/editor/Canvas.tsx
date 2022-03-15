@@ -1,27 +1,19 @@
 import React from "react";
 import styles from "../styles/canvas.scss";
-import { MeasurementUnit } from "..";
-import { Transformations } from "../hooks/useTransformation.hook";
 import { useEventListener } from "../hooks/useEventListener.hook";
-import { Layers } from "../hooks/useLayers.hook";
 import { CanvasItem } from "./CanvasItem";
+import { useEditorContext } from "../context/EditorContext";
 
-interface Props {
-  layers: Layers;
-  transformations: Transformations;
-  paperDimensions: { width: number; height: number };
-  paperUnit: MeasurementUnit;
-  title?: string;
-}
+export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
+  const ctx = useEditorContext();
 
-export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const viewportRef = props.transformations.refs.viewport;
+  const viewportRef = ctx.refs.viewportRef;
 
   const onMouseWheel = (event: WheelEvent) => {
     event.preventDefault();
 
     const delta = event.deltaY * -0.01;
-    props.transformations.zoom(delta * 0.1);
+    ctx.transformations.zoom(delta * 0.1);
   };
 
   const onMouseUp = (event: MouseEvent) => {
@@ -39,24 +31,24 @@ export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
       );
 
       if (!canvasItem) {
-        props.layers.unselectAll();
+        ctx.layers.unselectAll();
         return;
       }
 
       const layerIndex = parseInt(canvasItem.dataset.layerindex || "-1");
 
       if (event.shiftKey) {
-        if (props.layers.selectedLayerIndices.includes(layerIndex)) {
-          return props.layers.unselectLayer(layerIndex);
+        if (ctx.layers.selectedLayerIndices.includes(layerIndex)) {
+          return ctx.layers.unselectLayer(layerIndex);
         }
 
-        return props.layers.selectLayers(
-          ...props.layers.selectedLayerIndices,
+        return ctx.layers.selectLayers(
+          ...ctx.layers.selectedLayerIndices,
           layerIndex
         );
       }
 
-      return props.layers.selectLayers(layerIndex);
+      return ctx.layers.selectLayers(layerIndex);
     }
 
     if (event.button === 1 /* Mid-click */) {
@@ -78,20 +70,15 @@ export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
       className={styles.canvas}
       style={{
         transform: [
-          `translateX(${props.transformations.offset.x}px)`,
-          `translateY(${props.transformations.offset.y}px)`,
-          `scale(${props.transformations.scale})`,
+          `translateX(${ctx.transformations.offset.x}px)`,
+          `translateY(${ctx.transformations.offset.y}px)`,
+          `scale(${ctx.transformations.scale})`,
         ].join(" "),
       }}
     >
       <div ref={ref} className={styles.paper}>
-        {props.layers.list.map((layer, index) => (
-          <CanvasItem
-            index={index}
-            layer={layer}
-            layers={props.layers}
-            transformations={props.transformations}
-          />
+        {ctx.layers.list.map((layer, index) => (
+          <CanvasItem key={index} index={index} layer={layer} />
         ))}
       </div>
 
@@ -99,14 +86,14 @@ export const Canvas = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
         className={styles.manifest}
         style={{
           transform: `translateY(100%) translateY(5px) scale(${
-            1 / props.transformations.scale
+            1 / ctx.transformations.scale
           })`,
         }}
       >
-        <h1>{props.title || "Untitled Document"}</h1>
+        <h1>{ctx.editorProps.title || "Untitled Document"}</h1>
         <h2>
-          {props.paperDimensions.width ?? 0} x{" "}
-          {props.paperDimensions.height ?? 0} {props.paperUnit.abbr}
+          {ctx.editorProps.paperDimensions.width ?? 0} x{" "}
+          {ctx.editorProps.paperDimensions.height ?? 0} {ctx.paperUnit.abbr}
         </h2>
       </div>
     </div>

@@ -1,26 +1,27 @@
 import React from "react";
-import { Layer } from "..";
-import { getIntlMessage } from "../registry/intl/intl";
 import styles from "../styles/layers-list.scss";
-import { MeasurementUnit } from "../util/units.util";
+import { Layer } from "..";
+import { useEditorContext } from "../context/EditorContext";
+import { getIntlMessage } from "../registry/intl/intl";
 
 interface Props {
   layer: Layer;
-  paperUnit: MeasurementUnit;
   onClick: () => void;
 }
 
 export const LayerItem = (props: Props) => {
+  const ctx = useEditorContext();
+
   return (
     <li className={styles.item} onClick={props.onClick}>
-      <div className={styles.item__icon}>{props.layer.renderIcon()}</div>
+      <div className={styles.item__icon}>{props.layer.renderIcon(ctx)}</div>
 
       <span className={styles.item__header}>
-        <span>{props.layer.renderTypeText()}</span>{" "}
+        <span>{props.layer.renderTypeText(ctx)}</span>{" "}
         <span>
-          • ({props.paperUnit.fromMillimeters(props.layer.width) ?? 0} x{" "}
-          {props.paperUnit.fromMillimeters(props.layer.height) ?? 0}{" "}
-          {props.paperUnit.abbr})
+          • ({ctx.paperUnit.fromMillimeters(props.layer.width) ?? 0} x{" "}
+          {ctx.paperUnit.fromMillimeters(props.layer.height) ?? 0}{" "}
+          {ctx.paperUnit.abbr})
         </span>
       </span>
 
