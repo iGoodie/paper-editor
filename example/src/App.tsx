@@ -17,6 +17,7 @@ paperEditor.configure({
 paperEditor.registries.LayersRegistry.register(StaticTextLayer);
 
 const App = () => {
+  const [bg, setBg] = React.useState("");
   const [layers, setLayers] = React.useState<SerializedLayer[]>([
     paperEditor.Layer.createSerialized(StaticTextLayer, {
       width: 100,
@@ -74,6 +75,8 @@ const App = () => {
       <Editor
         layers={layers}
         onLayersChange={setLayers}
+        paperBackground={bg}
+        onBackgroundChange={setBg}
         paperUnit={getUnitByName("centimeters")}
         paperDimensions={{ width: 6.1, height: 11 }}
         viewportHeight={500}

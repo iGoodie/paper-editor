@@ -17,6 +17,7 @@ export interface EditorProps {
 
   title?: string;
   paperBackground?: string;
+  onBackgroundChange: (bg: string) => void;
   layers: SerializedLayer[];
   onLayersChange: (layers: SerializedLayer[]) => void;
 

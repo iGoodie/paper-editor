@@ -32,11 +32,11 @@ export * as ButtonStripeControl from "./editor/controls/ButtonStripeControl";
 
 // ---- Built-in Registrations ---- //
 
-import { EnterFullscreenRootAction } from "./built-in/root-action/EnterFullscreenRootAction";
-import { ExitFullscreenRootAction } from "./built-in/root-action/ExitFullscreenRootAction";
-import { ZoomCenterRootAction } from "./built-in/root-action/ZoomCenterRootAction";
-import { ZoomOutRootAction } from "./built-in/root-action/ZoomOutRootAction";
-import { ZoomInRootAction } from "./built-in/root-action/ZoomInRootAction";
+import { EnterFullscreenRootAction } from "./built-in/root-actions/EnterFullscreenRootAction";
+import { ExitFullscreenRootAction } from "./built-in/root-actions/ExitFullscreenRootAction";
+import { ZoomCenterRootAction } from "./built-in/root-actions/ZoomCenterRootAction";
+import { ZoomOutRootAction } from "./built-in/root-actions/ZoomOutRootAction";
+import { ZoomInRootAction } from "./built-in/root-actions/ZoomInRootAction";
 RootActionsRegistry.register(new EnterFullscreenRootAction());
 RootActionsRegistry.register(new ExitFullscreenRootAction());
 RootActionsRegistry.register(new ZoomCenterRootAction());

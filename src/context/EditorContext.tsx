@@ -75,9 +75,9 @@ export const EditorContextProvider: React.FC<Props> = (props) => {
         ctx.paperUnit.toPixels(ctx.editorProps.paperDimensions.width) + "px",
       "--paper-height":
         ctx.paperUnit.toPixels(ctx.editorProps.paperDimensions.height) + "px",
-      "--paper-background":
-        ctx.editorProps.paperBackground ||
-        "linear-gradient(180deg,#fff,#e8e8e8)",
+      "--paper-background": ctx.editorProps.paperBackground
+        ? `url("${ctx.editorProps.paperBackground}")`
+        : "linear-gradient(180deg,#fff,#e8e8e8)",
       ...(ctx.theme ? themeToCssVars(ctx.theme) : {}),
     }),
     [

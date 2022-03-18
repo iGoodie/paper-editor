@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "../styles/control-panels.scss";
-import { getIntlMessage } from "../registry/intl/intl";
-import { ReactComponent as CloseIcon } from "../assets/icon/close.svg";
-import { ReactComponent as SelectionBoxIcon } from "../assets/icon/selection-box.svg";
-import { EditableText } from "../components/EditableText";
-import { useEditorContext } from "../context/EditorContext";
+import styles from "../../styles/control-panels.scss";
+import { getIntlMessage } from "../../registry/intl/intl";
+import { ReactComponent as CloseIcon } from "../../assets/icon/close.svg";
+import { ReactComponent as SelectionBoxIcon } from "../../assets/icon/selection-box.svg";
+import { EditableText } from "../../components/EditableText";
+import { useEditorContext } from "../../context/EditorContext";
 
 export const SingularControlPanel = () => {
   const ctx = useEditorContext();

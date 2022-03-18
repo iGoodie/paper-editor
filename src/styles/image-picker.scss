@@ -1,0 +1,61 @@
+.root {
+  & > input[type="file"] {
+    display: none;
+  }
+
+  .dropzone {
+    width: auto;
+    height: 180px;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-image: var(
+      --selected-image,
+      url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%23F9F9F980' stroke-width='2' stroke-dasharray='10%2c 10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e")
+    );
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+
+    &--hovering {
+      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='10' ry='10' stroke='%23F9F9F9FF' stroke-width='2' stroke-dasharray='10%2c 10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+    }
+
+    &__spinner {
+      animation: spinnerAnim 1s infinite linear;
+    }
+
+    &__status {
+      margin-bottom: 10px;
+      font-family: var(--content-font);
+      color: rgba(#fff, 0.5);
+    }
+    &__hint {
+      font-family: var(--content-font);
+      color: #fff;
+      &:nth-of-type(3) {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .actions {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+@keyframes spinnerAnim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

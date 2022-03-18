@@ -7,7 +7,18 @@ export function useLayers(
 ) {
   const layers = serializedLayers.map(Layer.create);
 
+  const [editingBg, setEditingBg] = React.useState(false);
   const [selectedIndices, setSelectedIndices] = React.useState<number[]>([]);
+
+  const beginEditingBg = () => {
+    setEditingBg(true);
+    unselectAll();
+  };
+
+  const stopEditingBg = () => {
+    setEditingBg(false);
+    unselectAll();
+  };
 
   const selectLayers = (...layerIndices: number[]) => {
     setSelectedIndices(layerIndices);
@@ -37,6 +48,9 @@ export function useLayers(
     selectedLayers: selectedIndices.map((i) => layers[i]),
     singularSelected: selectedIndices.length === 1,
     multipleSelected: selectedIndices.length > 1,
+    editingBg,
+    beginEditingBg,
+    stopEditingBg,
     selectLayers,
     unselectLayer,
     unselectAll,
