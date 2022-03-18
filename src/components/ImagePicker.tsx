@@ -57,6 +57,13 @@ export const ImagePicker = (props: Props) => {
     onFileSelected(selectedFile);
   };
 
+  const reset = () => {
+    props.onChange("");
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+  };
+
   return (
     <div className={styles.root}>
       <input
@@ -104,7 +111,7 @@ export const ImagePicker = (props: Props) => {
           <Button onClick={() => inputRef.current?.click()}>
             Upload Again
           </Button>
-          <Button bgColor="#E34646" onClick={() => props.onChange("")}>
+          <Button bgColor="#E34646" onClick={reset}>
             Clear
           </Button>
         </div>

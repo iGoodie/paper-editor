@@ -3,10 +3,13 @@ import styles from "../styles/layers-list.scss";
 import { Layer } from "..";
 import { useEditorContext } from "../context/EditorContext";
 import { getIntlMessage } from "../registry/intl/intl";
+import { ReactComponent as LockIcon } from "../assets/icon/lock.svg";
 
 interface Props {
   layer: Layer;
   onClick: () => void;
+  locked?: boolean;
+  actions?: React.ReactNode;
 }
 
 export const LayerItem = (props: Props) => {
@@ -28,6 +31,13 @@ export const LayerItem = (props: Props) => {
       <span className={styles.item__title}>
         {props.layer.layerName ?? getIntlMessage("papereditor.value.untitled")}
       </span>
+
+      <div className={styles.item__actions}>
+        {props.locked && (
+          <LockIcon data-always-visible width={28} fill="#646464" />
+        )}
+        {props.actions}
+      </div>
     </li>
   );
 };

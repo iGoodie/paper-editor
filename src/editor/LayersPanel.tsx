@@ -9,8 +9,29 @@ import { useEditorContext } from "../context/EditorContext";
 import { PreviewBackgroundLayer } from "../built-in/layer/PreviewBackgroundLayer";
 import { BgControlPanel } from "./panels/BgControlPanel";
 
+import { ReactComponent as MoveUp } from "../assets/icon/move-up.svg";
+import { ReactComponent as MoveDown } from "../assets/icon/move-down.svg";
+
 export const LayersPanel = () => {
   const ctx = useEditorContext();
+
+  const moveLayerUp = (index: number) => (event: React.MouseEvent) => {
+    event.stopPropagation();
+    const thisLayer = ctx.layers.list[index];
+    const upperLayer = ctx.layers.list[index - 1];
+    ctx.layers.list[index] = upperLayer;
+    ctx.layers.list[index - 1] = thisLayer;
+    ctx.layers.updateLayers();
+  };
+
+  const moveLayerDown = (index: number) => (event: React.MouseEvent) => {
+    event.stopPropagation();
+    const thisLayer = ctx.layers.list[index];
+    const lowerLayer = ctx.layers.list[index + 1];
+    ctx.layers.list[index] = lowerLayer;
+    ctx.layers.list[index + 1] = thisLayer;
+    ctx.layers.updateLayers();
+  };
 
   return (
     <React.Fragment>
@@ -26,9 +47,20 @@ export const LayersPanel = () => {
               key={index}
               layer={layer}
               onClick={() => ctx.layers.selectLayers(index)}
+              actions={
+                <React.Fragment>
+                  {index != 0 && (
+                    <MoveUp width={18} onClick={moveLayerUp(index)} />
+                  )}
+                  {index != ctx.layers.list.length - 1 && (
+                    <MoveDown width={18} onClick={moveLayerDown(index)} />
+                  )}
+                </React.Fragment>
+              }
             />
           ))}
           <LayerItem
+            locked
             layer={new PreviewBackgroundLayer()}
             onClick={ctx.layers.beginEditingBg}
           />

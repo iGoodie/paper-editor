@@ -1,7 +1,7 @@
 .item {
   padding: 10px;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto 1fr auto;
   grid-template-rows: auto 1fr;
   align-items: center;
   column-gap: 10px;
@@ -45,5 +45,26 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  &__actions {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &:not(:empty) {
+      width: 28px;
+    }
+
+    & > :not([data-always-visible]) {
+      opacity: 0;
+    }
+  }
+  &:hover > &__actions > :not([data-always-visible]) {
+    opacity: 1;
   }
 }
