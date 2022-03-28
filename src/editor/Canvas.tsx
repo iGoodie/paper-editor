@@ -18,7 +18,7 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
 
   const onMouseUp = (event: MouseEvent) => {
     if (event.button === 1 /* Mid-click */) {
-      // Stop grabbing if grabbing
+      ctx.transformations.endGrab();
     }
   };
 
@@ -52,7 +52,19 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
     }
 
     if (event.button === 1 /* Mid-click */) {
-      // Grab clicked point
+      ctx.transformations.beginGrab({
+        x: event.clientX,
+        y: event.clientY,
+      });
+    }
+  };
+
+  const onMouseMove = (event: MouseEvent) => {
+    if (ctx.transformations.grabbing) {
+      ctx.transformations.tickGrab({
+        x: event.clientX,
+        y: event.clientY,
+      });
     }
   };
 
@@ -63,6 +75,7 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
   useEventListener(viewportRef, "wheel", onMouseWheel);
   useEventListener(viewportRef, "mouseup", onMouseUp);
   useEventListener(viewportRef, "mousedown", onMouseDown);
+  useEventListener(viewportRef, "mousemove", onMouseMove);
   useEventListener(viewportRef, "contextmenu", disableAction);
 
   return (

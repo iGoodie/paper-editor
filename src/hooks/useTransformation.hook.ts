@@ -13,6 +13,10 @@ export function useTransformation(
 
   const [grabbing, setGrabbing] = React.useState<boolean>(false);
   const [grabPos, setGrabPos] = React.useState<Coordinate>({ x: 0, y: 0 });
+  const [prevOffset, setPrevOffset] = React.useState<Coordinate>({
+    x: 0,
+    y: 0,
+  });
 
   const zoom = (deltaScale: number) => {
     const newScale = scale + deltaScale;
@@ -35,12 +39,32 @@ export function useTransformation(
     });
   };
 
+  const beginGrab = (pos: Coordinate) => {
+    setGrabbing(true);
+    setGrabPos(pos);
+    setPrevOffset(offset);
+  };
+
+  const tickGrab = (pos: Coordinate) => {
+    const dx = pos.x - grabPos.x;
+    const dy = pos.y - grabPos.y;
+    setOffset({
+      x: prevOffset.x + dx,
+      y: prevOffset.y + dy,
+    });
+  };
+
+  const endGrab = () => {
+    setGrabbing(false);
+  };
+
   return {
     // Vars
     offset,
     setOffset,
     scale,
     setScale,
+    grabbing,
 
     // Refs
     refs: {
@@ -52,6 +76,9 @@ export function useTransformation(
     // Functionalities
     centerView,
     zoom,
+    beginGrab,
+    endGrab,
+    tickGrab,
   };
 }
 
