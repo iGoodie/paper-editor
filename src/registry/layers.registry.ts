@@ -11,3 +11,7 @@ export function register(layerType: Class<Layer>) {
 export function getLayerType(typeName: string) {
   return registry.get(typeName);
 }
+
+export function mapLayerTypes<T>(mapper: (layerType: Class<Layer>) => T) {
+  return Array.from(registry.values()).map(mapper);
+}

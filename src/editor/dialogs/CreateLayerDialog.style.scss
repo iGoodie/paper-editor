@@ -1,0 +1,45 @@
+.option {
+  padding: 10px;
+  display: grid;
+  column-gap: 10px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: #dad1e0;
+  }
+
+  &__icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #3c3345;
+    grid-row: 1 / span 2;
+    & > :first-child {
+      height: 30px;
+    }
+  }
+
+  &__title {
+    font-family: var(--header-font);
+    font-size: 20px;
+    font-weight: 500;
+    color: #3c3345;
+  }
+
+  &__desc {
+    max-width: 50ch;
+    font-family: var(--header-font);
+    font-size: 14px;
+    color: #838185;
+  }
+}
+
+.layers {
+  display: flex;
+  flex-direction: column;
+}

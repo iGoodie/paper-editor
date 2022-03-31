@@ -8,12 +8,17 @@ import { SingularControlPanel } from "./panels/SingularControlPanel";
 import { useEditorContext } from "../context/EditorContext";
 import { PreviewBackgroundLayer } from "../built-in/layer/PreviewBackgroundLayer";
 import { BgControlPanel } from "./panels/BgControlPanel";
+import { IconButton } from "../components/IconButton";
 
 import { ReactComponent as MoveUp } from "../assets/icon/move-up.svg";
 import { ReactComponent as MoveDown } from "../assets/icon/move-down.svg";
+import { ReactComponent as AddIcon } from "../assets/icon/add.svg";
+import { useModalContext } from "../context/ModalContext";
+import { CreateLayerDialog } from "./dialogs/CreateLayerDialog";
 
 export const LayersPanel = () => {
   const ctx = useEditorContext();
+  const modal = useModalContext();
 
   const moveLayerUp = (index: number) => (event: React.MouseEvent) => {
     event.stopPropagation();
@@ -38,6 +43,11 @@ export const LayersPanel = () => {
       <div className={styles.header}>
         <LayersIcon />
         <h1>{getIntlMessage("papereditor.title.layers")}</h1>
+        <IconButton
+          className={styles.header__add}
+          icon={<AddIcon />}
+          onClick={() => modal.setDialog(<CreateLayerDialog />)}
+        />
       </div>
 
       <div className={styles.content}>

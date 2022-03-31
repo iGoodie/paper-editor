@@ -9,6 +9,8 @@ import { Canvas } from "./Canvas";
 import { MapScale } from "../components/MapScale";
 import { EditorContextProvider } from "../context/EditorContext";
 import { RootActionButton } from "./RootActionButton";
+import { Modal } from "./Modal";
+import { ModalContextProvider } from "../context/ModalContext";
 
 export interface EditorProps {
   viewportHeight: number;
@@ -30,35 +32,39 @@ export const Editor = (props: EditorProps) => {
   const paperRef = React.useRef<HTMLDivElement>(null);
 
   return (
-    <EditorContextProvider
-      refs={{ editorRef, viewportRef, paperRef }}
-      editorProps={props}
-    >
-      {(ctx, editorVars) => (
-        <div ref={editorRef} className={styles.editor} style={editorVars}>
-          <div className={styles.editor__layers}>
-            <LayersPanel />
-          </div>
+    <ModalContextProvider>
+      <EditorContextProvider
+        refs={{ editorRef, viewportRef, paperRef }}
+        editorProps={props}
+      >
+        {(ctx, editorVars) => (
+          <div ref={editorRef} className={styles.editor} style={editorVars}>
+            <div className={styles.editor__layers}>
+              <LayersPanel />
+            </div>
 
-          <div ref={viewportRef} className={styles.editor__viewport}>
-            <Canvas ref={paperRef} />
-          </div>
+            <div ref={viewportRef} className={styles.editor__viewport}>
+              <Canvas ref={paperRef} />
+            </div>
 
-          <div className={styles.editor__rootactions}>
-            {mapRootActions(ctx, (rootAction, index) => (
-              <RootActionButton key={index} rootAction={rootAction} />
-            ))}
-          </div>
+            <div className={styles.editor__rootactions}>
+              {mapRootActions(ctx, (rootAction, index) => (
+                <RootActionButton key={index} rootAction={rootAction} />
+              ))}
+            </div>
 
-          <MapScale
-            width={100}
-            className={styles.editor__mapscale}
-            transformations={ctx.transformations}
-            paperUnit={props.paperUnit}
-          />
-        </div>
-      )}
-    </EditorContextProvider>
+            <MapScale
+              width={100}
+              className={styles.editor__mapscale}
+              transformations={ctx.transformations}
+              paperUnit={props.paperUnit}
+            />
+
+            <Modal />
+          </div>
+        )}
+      </EditorContextProvider>
+    </ModalContextProvider>
   );
 };
 
