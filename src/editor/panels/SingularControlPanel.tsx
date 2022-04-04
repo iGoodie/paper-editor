@@ -5,14 +5,26 @@ import { ReactComponent as CloseIcon } from "../../assets/icon/close.svg";
 import { ReactComponent as SelectionBoxIcon } from "../../assets/icon/selection-box.svg";
 import { EditableText } from "../../components/EditableText";
 import { useEditorContext } from "../../context/EditorContext";
+import { Button } from "../../components/Button";
 
 export const SingularControlPanel = () => {
   const ctx = useEditorContext();
   const selectedLayer = ctx.layers.selectedLayers[0];
+  const [deleting, setDeleting] = React.useState(false);
 
   const renameLayerName = (newName: string) => {
     selectedLayer.layerName = newName;
     ctx.layers.updateLayers();
+  };
+
+  const beginDeletion = () => {
+    setDeleting(true);
+    setTimeout(() => setDeleting(false), 3000);
+  };
+
+  const deleteLayer = () => {
+    ctx.layers.deleteLayer(selectedLayer);
+    setDeleting(false);
   };
 
   return (
@@ -39,6 +51,12 @@ export const SingularControlPanel = () => {
 
       <div className={styles.panel__content}>
         {selectedLayer.renderControls(ctx)}
+        <Button
+          bgColor={deleting ? "#E34646" : undefined}
+          onClick={deleting ? deleteLayer : beginDeletion}
+        >
+          {deleting ? "Confirm Deletion?" : "Delete Layer"}
+        </Button>
       </div>
     </div>
   );

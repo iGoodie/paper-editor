@@ -5,7 +5,7 @@ export function useLayers(
   serializedLayers: SerializedLayer[],
   onLayersChange: (serializedLayers: SerializedLayer[]) => void
 ) {
-  const layers = serializedLayers.map(Layer.create);
+  const layerList = serializedLayers.map(Layer.create);
 
   const [editingBg, setEditingBg] = React.useState(false);
   const [selectedIndices, setSelectedIndices] = React.useState<number[]>([]);
@@ -31,21 +31,42 @@ export function useLayers(
   const unselectAll = () => setSelectedIndices([]);
 
   const updateLayers = () => {
-    console.debug({ layers });
-    onLayersChange(layers.map((layer) => layer.serialize()));
+    console.debug({ layerList });
+    onLayersChange(layerList.map((layer) => layer.serialize()));
   };
 
-  const createLayer = (layer: Layer) => {
+  const prependLayer = (layer: Layer) => {
     onLayersChange([layer.serialize(), ...serializedLayers]);
     setSelectedIndices(selectedIndices.map((index) => index + 1));
   };
 
-  console.log({ layers, selectedIndices });
+  const appendLayer = (layer: Layer) => {
+    onLayersChange([...serializedLayers, layer.serialize()]);
+  };
+
+  const deleteLayer = (layer: Layer) => {
+    const index = layerList.indexOf(layer);
+    return deleteLayerByIndex(index);
+  };
+
+  const deleteLayerByIndex = (index: number) => {
+    layerList.splice(index, 1);
+    setSelectedIndices(
+      selectedIndices
+        .filter((selectedIndex) => selectedIndex != index)
+        .map((selectedIndex) =>
+          selectedIndex > index ? selectedIndex - 1 : selectedIndex
+        )
+    );
+    updateLayers();
+  };
+
+  console.log({ layers: layerList, selectedIndices });
 
   return {
-    list: layers,
+    list: layerList,
     selectedLayerIndices: selectedIndices,
-    selectedLayers: selectedIndices.map((i) => layers[i]),
+    selectedLayers: selectedIndices.map((i) => layerList[i]),
     singularSelected: selectedIndices.length === 1,
     multipleSelected: selectedIndices.length > 1,
     editingBg,
@@ -55,7 +76,10 @@ export function useLayers(
     unselectLayer,
     unselectAll,
     updateLayers,
-    createLayer,
+    prependLayer,
+    appendLayer,
+    deleteLayer,
+    deleteLayerByIndex,
   };
 }
 

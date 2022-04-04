@@ -36,8 +36,7 @@ export const CreateLayerDialog = () => {
   const modal = useModalContext();
 
   const createLayer = (layer: Layer) => {
-    ctx.layers.list.unshift(layer);
-    ctx.layers.updateLayers();
+    ctx.layers.prependLayer(layer);
   };
 
   return (
