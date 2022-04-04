@@ -15,13 +15,19 @@ export const CanvasItem = (props: Props) => {
   const ctx = useEditorContext();
   const selected = ctx.layers.selectedLayers.includes(props.layer);
 
+  const unit = getUnitByAbbr("mm");
+
   const outterStyles = useInlineStyle(
     () => ({
-      "--x": getUnitByAbbr("mm").toPixels(props.layer.x) + "px",
-      "--y": getUnitByAbbr("mm").toPixels(props.layer.y) + "px",
-      "--width": getUnitByAbbr("mm").toPixels(props.layer.width) + "px",
-      "--height": getUnitByAbbr("mm").toPixels(props.layer.height) + "px",
+      "--x": unit.toPixels(props.layer.x) + "px",
+      "--y": unit.toPixels(props.layer.y) + "px",
       "--scale": ctx.transformations.scale,
+      "--width": props.layer.width
+        ? "fit-content"
+        : unit.toPixels(props.layer.width) + "px",
+      "--height": props.layer.height
+        ? "fit-content"
+        : unit.toPixels(props.layer.height) + "px",
     }),
     [
       props.layer.x,

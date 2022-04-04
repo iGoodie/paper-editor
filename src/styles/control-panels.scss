@@ -75,5 +75,9 @@
     row-gap: 8px;
     overflow-y: scroll;
     overscroll-behavior: contain;
+
+    &__deletion {
+      margin-top: auto;
+    }
   }
 }

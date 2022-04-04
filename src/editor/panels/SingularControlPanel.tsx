@@ -52,6 +52,7 @@ export const SingularControlPanel = () => {
       <div className={styles.panel__content}>
         {selectedLayer.renderControls(ctx)}
         <Button
+          className={styles.panel__content__deletion}
           bgColor={deleting ? "#E34646" : undefined}
           onClick={deleting ? deleteLayer : beginDeletion}
         >

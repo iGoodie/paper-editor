@@ -32,6 +32,13 @@
     &:focus {
       outline-color: currentColor;
     }
+
+    &::placeholder {
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      font-style: italic;
+    }
   }
 
   & > span {
