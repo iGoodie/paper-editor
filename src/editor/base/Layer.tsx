@@ -14,6 +14,7 @@ export abstract class Layer {
   y: number = 0;
   width: number = 0;
   height: number = 0;
+  autoFit: boolean = false;
 
   abstract getType(): string;
 
@@ -33,6 +34,7 @@ export abstract class Layer {
       y: this.y,
       width: this.width,
       height: this.height,
+      autoFit: this.autoFit,
     };
   }
 
@@ -42,6 +44,7 @@ export abstract class Layer {
     if ("y" in serialized) this.y = serialized.y!;
     if ("width" in serialized) this.width = serialized.width!;
     if ("height" in serialized) this.height = serialized.height!;
+    if ("autoFit" in serialized) this.autoFit = serialized.autoFit!;
     return this;
   }
 

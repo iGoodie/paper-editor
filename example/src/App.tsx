@@ -28,6 +28,7 @@ const App = () => {
       y: 10,
       width: 300,
       height: 400,
+      autoFit: true,
       layerName: "Yo hey there!",
       data: "Yo hey there!",
     }),

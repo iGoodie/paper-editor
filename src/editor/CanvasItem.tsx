@@ -22,10 +22,10 @@ export const CanvasItem = (props: Props) => {
       "--x": unit.toPixels(props.layer.x) + "px",
       "--y": unit.toPixels(props.layer.y) + "px",
       "--scale": ctx.transformations.scale,
-      "--width": props.layer.width
+      "--width": props.layer.autoFit
         ? "fit-content"
         : unit.toPixels(props.layer.width) + "px",
-      "--height": props.layer.height
+      "--height": props.layer.autoFit
         ? "fit-content"
         : unit.toPixels(props.layer.height) + "px",
     }),
