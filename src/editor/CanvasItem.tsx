@@ -19,8 +19,8 @@ export const CanvasItem = (props: Props) => {
     () => ({
       "--x": getUnitByAbbr("mm").toPixels(props.layer.x) + "px",
       "--y": getUnitByAbbr("mm").toPixels(props.layer.y) + "px",
-      "--width": props.layer.width,
-      "--height": props.layer.height,
+      "--width": getUnitByAbbr("mm").toPixels(props.layer.width) + "px",
+      "--height": getUnitByAbbr("mm").toPixels(props.layer.height) + "px",
       "--scale": ctx.transformations.scale,
     }),
     [

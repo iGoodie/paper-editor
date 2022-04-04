@@ -1,6 +1,6 @@
 {
-  "name": "paper-editor",
-  "version": "1.0.0",
+  "name": "@igoodie/paper-editor",
+  "version": "0.1.0-alpha",
   "description": "",
   "author": "iGoodie",
   "license": "MIT",
@@ -57,6 +57,9 @@
     "react-scripts": "^5.0.0",
     "sass": "^1.49.9",
     "typescript": "^4.5.4"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
     "dist"

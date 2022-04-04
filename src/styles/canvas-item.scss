@@ -2,6 +2,8 @@
   $outline-width: 3px;
 
   position: absolute;
+  width: var(--width);
+  height: var(--height);
   user-select: none;
   transform: translateX(var(--x)) translateY(var(--y));
 
