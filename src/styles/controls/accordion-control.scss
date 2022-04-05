@@ -1,6 +1,7 @@
 .accordion {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   border-radius: 5px;
 
   &__header {
