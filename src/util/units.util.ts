@@ -31,6 +31,7 @@ const unitsByAbbr = new Map<string, MeasurementUnit>();
 
 function registerUnit(unit: MeasurementUnit) {
   unitsByName.set(unit.name, unit);
+  unitsByAbbr.set(unit.abbr, unit);
 }
 
 const defaultUnit = new MeasurementUnit("millimeters", "mm", 1);
