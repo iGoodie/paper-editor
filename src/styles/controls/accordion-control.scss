@@ -1,7 +1,6 @@
 .accordion {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   border-radius: 5px;
 
   &__header {
@@ -29,6 +28,9 @@
   &__content {
     height: auto;
     flex-basis: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     overflow: hidden;
     box-sizing: border-box;
     transition: flex 200ms;
