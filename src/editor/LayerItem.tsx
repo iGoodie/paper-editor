@@ -14,6 +14,9 @@ interface Props {
 
 export const LayerItem = (props: Props) => {
   const ctx = useEditorContext();
+  const node = ctx.layers.getNode(props.layer, ctx);
+  const width = ctx.layers.getWidth(props.layer, ctx);
+  const height = ctx.layers.getHeight(props.layer, ctx);
 
   return (
     <li className={styles.item} onClick={props.onClick}>
@@ -21,11 +24,11 @@ export const LayerItem = (props: Props) => {
 
       <span className={styles.item__header}>
         <span>{props.layer.renderTypeText(ctx)}</span>{" "}
-        <span>
-          • ({ctx.paperUnit.fromMillimeters(props.layer.width) ?? 0} x{" "}
-          {ctx.paperUnit.fromMillimeters(props.layer.height) ?? 0}{" "}
-          {ctx.paperUnit.abbr})
-        </span>
+        {node && (
+          <span>
+            • ({width} x {height} {ctx.paperUnit.abbr})
+          </span>
+        )}
       </span>
 
       <span className={styles.item__title}>

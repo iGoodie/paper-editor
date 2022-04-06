@@ -1,11 +1,14 @@
 import React from "react";
+import { IEditorContext } from "../context/EditorContext";
 import { Layer, SerializedLayer } from "../editor/base/Layer";
+import { getUnitByAbbr, MeasurementUnit } from "../util/units.util";
 
 export function useLayers(
   serializedLayers: SerializedLayer[],
   onLayersChange: (serializedLayers: SerializedLayer[]) => void
 ) {
   const layerList = serializedLayers.map(Layer.create);
+  const unitMm = getUnitByAbbr("mm");
 
   const [editingBg, setEditingBg] = React.useState(false);
   const [selectedIndices, setSelectedIndices] = React.useState<number[]>([]);
@@ -61,7 +64,47 @@ export function useLayers(
     updateLayers();
   };
 
-  console.log({ layers: layerList, selectedIndices });
+  const getNode = (layer: Layer, ctx: IEditorContext) => {
+    const index = layerList.indexOf(layer);
+
+    if (index === -1) {
+      return null;
+    }
+
+    return ctx.refs.paperRef.current?.querySelector(`:nth-child(${index + 1})`);
+  };
+
+  const getWidth = (layer: Layer, ctx: IEditorContext) => {
+    if (!layer.autoFit) {
+      return ctx.paperUnit.fromMillimeters(layer.width);
+    }
+
+    const node = getNode(layer, ctx);
+
+    if (node == null) {
+      return -1;
+    }
+
+    return ctx.paperUnit.fromPixels(node.clientWidth);
+  };
+
+  const getHeight = (layer: Layer, ctx: IEditorContext) => {
+    if (!layer.autoFit) {
+      return ctx.paperUnit.fromMillimeters(layer.height);
+    }
+
+    const node = getNode(layer, ctx);
+
+    if (node == null) {
+      return -1;
+    }
+
+    if (node == null) {
+      return -1;
+    }
+
+    return ctx.paperUnit.fromPixels(node.clientHeight);
+  };
 
   return {
     list: layerList,
@@ -80,6 +123,9 @@ export function useLayers(
     appendLayer,
     deleteLayer,
     deleteLayerByIndex,
+    getNode,
+    getWidth,
+    getHeight,
   };
 }
 
