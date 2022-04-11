@@ -20,8 +20,10 @@ const App = () => {
   const [bg, setBg] = React.useState("");
   const [layers, setLayers] = React.useState<SerializedLayer[]>([
     paperEditor.Layer.createSerialized(StaticTextLayer, {
-      width: 100,
-      height: 200,
+      width: 50,
+      height: 50,
+      layerName: "First layer",
+      data: "First layer!",
     }),
     paperEditor.Layer.createSerialized(StaticTextLayer, {
       x: 10,
@@ -29,42 +31,18 @@ const App = () => {
       width: 300,
       height: 400,
       autoFit: true,
-      layerName: "Yo hey there!",
-      data: "Yo hey there!",
+      layerName: "Second layer",
+      data: "Second layer!",
     }),
     paperEditor.Layer.createSerialized(StaticTextLayer, {
       x: 10,
       y: 30,
-      width: 300,
-      height: 400,
-      layerName: "Yo hey there!",
+      width: 30,
+      height: 40,
+      layerName: "Third layer",
+      data: "Third layer",
       fontSize: 5,
-      data: "Yo hey there!",
     }),
-    // paperEditor.Layer.createSerialized(StaticTextLayer, {
-    //   layerName: "A very static name",
-    //   data: "Hey there!",
-    // }),
-    // paperEditor.Layer.createSerialized(StaticTextLayer, {
-    //   layerName: "Sooooo long to fit here lmao",
-    //   data: "Hey there!",
-    // }),
-    // paperEditor.Layer.createSerialized(StaticTextLayer, {
-    //   layerName: "Sooooo long to fit here lmao",
-    //   data: "Hey there!",
-    // }),
-    // paperEditor.Layer.createSerialized(StaticTextLayer, {
-    //   layerName: "Sooooo long to fit here lmao",
-    //   data: "Hey there!",
-    // }),
-    // paperEditor.Layer.createSerialized(StaticTextLayer, {
-    //   layerName: "Sooooo long to fit here lmao",
-    //   data: "Hey there!",
-    // }),
-    // paperEditor.Layer.createSerialized(StaticTextLayer, {
-    //   layerName: "Sooooo long to fit here lmao",
-    //   data: "Hey there!",
-    // }),
   ]);
 
   console.log({ appLayers: layers });

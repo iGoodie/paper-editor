@@ -3,6 +3,7 @@ import styles from "../styles/canvas.scss";
 import { useEventListener } from "../hooks/useEventListener.hook";
 import { CanvasItem } from "./CanvasItem";
 import { useEditorContext } from "../context/EditorContext";
+import { reverseMap } from "../util/reverse-map.util";
 
 export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const ctx = useEditorContext();
@@ -90,8 +91,8 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
       }}
     >
       <div ref={ref} className={styles.paper}>
-        {ctx.layers.list.map((layer, index) => (
-          <CanvasItem key={index} index={index} layer={layer} />
+        {reverseMap(ctx.layers.list, (layer, reverseIndex) => (
+          <CanvasItem key={reverseIndex} index={reverseIndex} layer={layer} />
         ))}
       </div>
 
