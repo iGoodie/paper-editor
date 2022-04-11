@@ -14,7 +14,6 @@ interface Props {
   layers: Layers;
 }
 
-// TODO:
 export const AlignControls = (props: Props) => {
   const ctx = useEditorContext();
 
@@ -24,7 +23,7 @@ export const AlignControls = (props: Props) => {
     }
     return props.layers.selectedLayers.reduce(
       (minValue, layer) => Math.min(minValue, layer.x),
-      0
+      props.layers.selectedLayers[0].x
     );
   };
 
@@ -45,7 +44,7 @@ export const AlignControls = (props: Props) => {
     }
     return props.layers.selectedLayers.reduce(
       (minValue, layer) => Math.min(minValue, layer.y),
-      0
+      props.layers.selectedLayers[0].y
     );
   };
 

@@ -15,6 +15,7 @@ import { ReactComponent as MoveDown } from "../assets/icon/move-down.svg";
 import { ReactComponent as AddIcon } from "../assets/icon/add.svg";
 import { useModalContext } from "../context/ModalContext";
 import { CreateLayerDialog } from "./dialogs/CreateLayerDialog";
+import { MultipleControlPanel } from "./panels/MultipleControlPanel";
 
 export const LayersPanel = () => {
   const ctx = useEditorContext();
@@ -90,7 +91,7 @@ export const LayersPanel = () => {
         ) : ctx.layers.singularSelected ? (
           <SingularControlPanel />
         ) : (
-          <p>Multiple Items</p>
+          <MultipleControlPanel />
         )}
       </div>
     </React.Fragment>
