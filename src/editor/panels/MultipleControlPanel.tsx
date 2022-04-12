@@ -11,10 +11,23 @@ import { formatIntlMessage } from "../../registry/intl/intl";
 export const MultipleControlPanel = () => {
   const ctx = useEditorContext();
   const [deleting, setDeleting] = React.useState(false);
+  const deletionTimeout = React.useRef<NodeJS.Timeout>();
+
+  React.useEffect(() => {
+    () => {
+      if (deletionTimeout.current != null) {
+        clearTimeout(deletionTimeout.current);
+      }
+    };
+  }, []);
 
   const beginDeletion = () => {
     setDeleting(true);
-    setTimeout(() => setDeleting(false), 3000);
+    // TODO: useTimeout
+    deletionTimeout.current = setTimeout(() => {
+      setDeleting(false);
+      deletionTimeout.current = undefined;
+    }, 3000);
   };
 
   const deleteLayers = () => {

@@ -8,7 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
 } from "../Modal";
-import { mapLayerTypes } from "../../registry/layers.registry";
+import { getLayerTypes } from "../../registry/layers.registry";
 import { Layer } from "../base/Layer";
 import { useModalContext } from "../../context/ModalContext";
 import { formatIntlMessage } from "../../registry/intl/intl";
@@ -53,8 +53,9 @@ export const CreateLayerDialog = () => {
 
       <DialogContent>
         <div className={styles.layers}>
-          {mapLayerTypes((layerType) => (
+          {getLayerTypes().map((layerType, index) => (
             <LayerOption
+              key={index}
               layer={new layerType()}
               onClick={() => {
                 createLayer(new layerType());

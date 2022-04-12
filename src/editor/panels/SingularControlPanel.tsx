@@ -11,6 +11,13 @@ export const SingularControlPanel = () => {
   const ctx = useEditorContext();
   const selectedLayer = ctx.layers.selectedLayers[0];
   const [deleting, setDeleting] = React.useState(false);
+  const deletionTimeout = React.useRef<NodeJS.Timeout>();
+
+  React.useEffect(() => {
+    if (deletionTimeout.current != null) {
+      clearTimeout(deletionTimeout.current);
+    }
+  }, []);
 
   const renameLayerName = (newName: string) => {
     selectedLayer.layerName = newName;
@@ -19,7 +26,11 @@ export const SingularControlPanel = () => {
 
   const beginDeletion = () => {
     setDeleting(true);
-    setTimeout(() => setDeleting(false), 3000);
+    // TODO: useTimeout
+    deletionTimeout.current = setTimeout(() => {
+      setDeleting(false);
+      deletionTimeout.current = undefined;
+    }, 3000);
   };
 
   const deleteLayer = () => {

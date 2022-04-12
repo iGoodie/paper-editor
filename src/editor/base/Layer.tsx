@@ -1,5 +1,6 @@
 import React from "react";
 import { IEditorContext } from "../../context/EditorContext";
+import { formatIntlMessage } from "../../registry/intl/intl";
 import { getLayerType } from "../../registry/layers.registry";
 
 export type PropertiesOnly<T> = Partial<
@@ -17,7 +18,9 @@ export abstract class Layer {
   autoFit: boolean = false;
 
   getLayerName() {
-    return this.layerName;
+    return (
+      this.layerName || formatIntlMessage("papereditor.value.untitled-layer")
+    );
   }
 
   abstract getType(): string;
