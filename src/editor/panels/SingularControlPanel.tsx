@@ -13,12 +13,6 @@ export const SingularControlPanel = () => {
   const [deleting, setDeleting] = React.useState(false);
   const deletionTimeout = React.useRef<NodeJS.Timeout>();
 
-  React.useEffect(() => {
-    if (deletionTimeout.current != null) {
-      clearTimeout(deletionTimeout.current);
-    }
-  }, []);
-
   const renameLayerName = (newName: string) => {
     selectedLayer.layerName = newName;
     ctx.layers.updateLayers();
@@ -26,7 +20,6 @@ export const SingularControlPanel = () => {
 
   const beginDeletion = () => {
     setDeleting(true);
-    // TODO: useTimeout
     deletionTimeout.current = setTimeout(() => {
       setDeleting(false);
       deletionTimeout.current = undefined;
@@ -36,6 +29,9 @@ export const SingularControlPanel = () => {
   const deleteLayer = () => {
     ctx.layers.deleteLayer(selectedLayer);
     setDeleting(false);
+    if (deletionTimeout.current != null) {
+      clearTimeout(deletionTimeout.current);
+    }
   };
 
   return (

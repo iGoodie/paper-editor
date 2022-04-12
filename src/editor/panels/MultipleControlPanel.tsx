@@ -13,17 +13,8 @@ export const MultipleControlPanel = () => {
   const [deleting, setDeleting] = React.useState(false);
   const deletionTimeout = React.useRef<NodeJS.Timeout>();
 
-  React.useEffect(() => {
-    () => {
-      if (deletionTimeout.current != null) {
-        clearTimeout(deletionTimeout.current);
-      }
-    };
-  }, []);
-
   const beginDeletion = () => {
     setDeleting(true);
-    // TODO: useTimeout
     deletionTimeout.current = setTimeout(() => {
       setDeleting(false);
       deletionTimeout.current = undefined;
@@ -35,6 +26,9 @@ export const MultipleControlPanel = () => {
     ctx.layers.unselectAll();
     ctx.layers.updateLayers();
     setDeleting(false);
+    if (deletionTimeout.current != null) {
+      clearTimeout(deletionTimeout.current);
+    }
   };
 
   return (
