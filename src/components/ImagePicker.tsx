@@ -5,6 +5,7 @@ import { file2Base64 } from "../util/file.util";
 import { Button } from "./Button";
 import { ReactComponent as Spinner } from "../assets/icon/spinner.svg";
 import { useInlineStyle } from "../hooks/useInlineStyle.hook";
+import { formatIntlMessage } from "../registry/intl/intl";
 
 interface Props {
   imageB64?: string;
@@ -87,19 +88,25 @@ export const ImagePicker = (props: Props) => {
       >
         {loading ? (
           <React.Fragment>
-            <span className={styles.dropzone__status}>Loading...</span>
+            <span className={styles.dropzone__status}>
+              {formatIntlMessage("papereditor.picker.loading")}
+            </span>
             <Spinner className={styles.dropzone__spinner} />
           </React.Fragment>
         ) : (
           !props.imageB64 && (
             <React.Fragment>
-              <span className={styles.dropzone__status}>No image present</span>
-              <span className={styles.dropzone__hint}>
-                Drag & drop image file here
+              <span className={styles.dropzone__status}>
+                {formatIntlMessage("papereditor.picker.no-image")}
               </span>
-              <span className={styles.dropzone__hint}>OR</span>
+              <span className={styles.dropzone__hint}>
+                {formatIntlMessage("papereditor.picker.drag-drop-here")}
+              </span>
+              <span className={styles.dropzone__hint}>
+                {formatIntlMessage("papereditor.picker.or")}
+              </span>
               <Button onClick={() => inputRef.current?.click()}>
-                Click Here
+                {formatIntlMessage("papereditor.picker.click-here")}
               </Button>
             </React.Fragment>
           )
@@ -109,10 +116,10 @@ export const ImagePicker = (props: Props) => {
       {!loading && props.imageB64 && (
         <div className={styles.actions}>
           <Button onClick={() => inputRef.current?.click()}>
-            Upload Again
+            {formatIntlMessage("papereditor.picker.upload-again")}
           </Button>
           <Button bgColor="#E34646" onClick={reset}>
-            Clear
+            {formatIntlMessage("papereditor.picker.clear")}
           </Button>
         </div>
       )}

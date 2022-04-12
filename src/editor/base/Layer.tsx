@@ -16,7 +16,13 @@ export abstract class Layer {
   height: number = 0;
   autoFit: boolean = false;
 
+  getLayerName() {
+    return this.layerName;
+  }
+
   abstract getType(): string;
+
+  abstract renderDescription(ctx: IEditorContext): React.ReactNode;
 
   abstract renderIcon(ctx: IEditorContext): React.ReactNode;
 

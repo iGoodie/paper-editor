@@ -4,6 +4,7 @@ import { useEventListener } from "../hooks/useEventListener.hook";
 import { CanvasItem } from "./CanvasItem";
 import { useEditorContext } from "../context/EditorContext";
 import { reverseMap } from "../util/reverse-map.util";
+import { formatIntlMessage } from "../registry/intl/intl";
 
 export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const ctx = useEditorContext();
@@ -104,7 +105,10 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
           })`,
         }}
       >
-        <h1>{ctx.editorProps.title || "Untitled Document"}</h1>
+        <h1>
+          {ctx.editorProps.title ||
+            formatIntlMessage("papereditor.value.untitled-document")}
+        </h1>
         <h2>
           {ctx.editorProps.paperDimensions.width ?? 0} x{" "}
           {ctx.editorProps.paperDimensions.height ?? 0} {ctx.paperUnit.abbr}

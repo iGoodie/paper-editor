@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/control-panels.scss";
-import { getIntlMessage } from "../../registry/intl/intl";
+import { formatIntlMessage } from "../../registry/intl/intl";
 import { ReactComponent as CloseIcon } from "../../assets/icon/close.svg";
 import { ReactComponent as SelectionBoxIcon } from "../../assets/icon/selection-box.svg";
 import { EditableText } from "../../components/EditableText";
@@ -18,8 +18,10 @@ export const BgControlPanel = () => {
           {layer.renderIcon(ctx)}
           <SelectionBoxIcon />
         </div>
-        <h2 className={styles.panel__header__desc}>Editing Background</h2>
-        <p className={styles.panel__header__title}>{layer.layerName}</p>
+        <h2 className={styles.panel__header__desc}>
+          {formatIntlMessage("papereditor.title.preview-element")}
+        </h2>
+        <p className={styles.panel__header__title}>{layer.getLayerName()}</p>
         <button
           className={styles.panel__header__unselect}
           onClick={ctx.layers.stopEditingBg}

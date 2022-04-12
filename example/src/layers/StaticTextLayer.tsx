@@ -10,11 +10,21 @@ import {
 import { ReactComponent as Icon } from "../assets/icon/static-text-icon.svg";
 
 export class StaticTextLayer extends Layer {
-  data?: string = "";
+  data?: string;
   fontSize?: number; // in millimeters
+
+  constructor() {
+    super();
+    this.data = "Default Text";
+    this.autoFit = true;
+  }
 
   getType(): string {
     return "static-text";
+  }
+
+  renderDescription() {
+    return "I'm a very static text";
   }
 
   renderIcon(): React.ReactNode {

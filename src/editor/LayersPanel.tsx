@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/layers-panel.scss";
 import { ReactComponent as LayersIcon } from "../assets/icon/layers.svg";
-import { getIntlMessage } from "../registry/intl/intl";
+import { formatIntlMessage } from "../registry/intl/intl";
 import { LayerItem } from "./LayerItem";
 import { classes } from "../util/classes.util";
 import { SingularControlPanel } from "./panels/SingularControlPanel";
@@ -43,7 +43,7 @@ export const LayersPanel = () => {
     <React.Fragment>
       <div className={styles.header}>
         <LayersIcon />
-        <h1>{getIntlMessage("papereditor.title.layers")}</h1>
+        <h1>{formatIntlMessage("papereditor.title.layers")}</h1>
         <IconButton
           className={styles.header__add}
           icon={<AddIcon />}
@@ -90,9 +90,9 @@ export const LayersPanel = () => {
           <BgControlPanel />
         ) : ctx.layers.singularSelected ? (
           <SingularControlPanel />
-        ) : (
+        ) : ctx.layers.multipleSelected ? (
           <MultipleControlPanel />
-        )}
+        ) : null}
       </div>
     </React.Fragment>
   );

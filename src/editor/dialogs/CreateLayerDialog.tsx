@@ -11,6 +11,7 @@ import {
 import { mapLayerTypes } from "../../registry/layers.registry";
 import { Layer } from "../base/Layer";
 import { useModalContext } from "../../context/ModalContext";
+import { formatIntlMessage } from "../../registry/intl/intl";
 
 interface OptionProps {
   layer: Layer;
@@ -26,7 +27,9 @@ const LayerOption = (props: OptionProps) => {
       <div className={styles.option__title}>
         {props.layer.renderTypeText(ctx)}
       </div>
-      <div className={styles.option__desc}>Description here</div>
+      <div className={styles.option__desc}>
+        {props.layer.renderDescription(ctx)}
+      </div>
     </div>
   );
 };
@@ -43,7 +46,7 @@ export const CreateLayerDialog = () => {
     <React.Fragment>
       <DialogHeader>
         <LayersIcon />
-        <h1>New Layer</h1>
+        <h1>{formatIntlMessage("papereditor.title.new-layer")}</h1>
       </DialogHeader>
 
       <DialogDivider />

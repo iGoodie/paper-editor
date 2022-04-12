@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/control-panels.scss";
-import { getIntlMessage } from "../../registry/intl/intl";
+import { formatIntlMessage } from "../../registry/intl/intl";
 import { ReactComponent as CloseIcon } from "../../assets/icon/close.svg";
 import { ReactComponent as SelectionBoxIcon } from "../../assets/icon/selection-box.svg";
 import { EditableText } from "../../components/EditableText";
@@ -34,10 +34,12 @@ export const SingularControlPanel = () => {
           {selectedLayer.renderIcon(ctx)}
           <SelectionBoxIcon />
         </div>
-        <h2 className={styles.panel__header__desc}>Selected Layer</h2>
+        <h2 className={styles.panel__header__desc}>
+          {formatIntlMessage("papereditor.title.selected-layer")}
+        </h2>
         <EditableText
           className={styles.panel__header__title}
-          defaultValue={getIntlMessage("papereditor.value.untitled")}
+          defaultValue={formatIntlMessage("papereditor.value.untitled-layer")}
           value={selectedLayer.layerName}
           onChange={renameLayerName}
         />
@@ -56,7 +58,9 @@ export const SingularControlPanel = () => {
           bgColor={deleting ? "#E34646" : undefined}
           onClick={deleting ? deleteLayer : beginDeletion}
         >
-          {deleting ? "Confirm Deletion?" : "Delete Layer"}
+          {deleting
+            ? formatIntlMessage("papereditor.btn.confirm-deletion")
+            : formatIntlMessage("papereditor.btn.delete-layer")}
         </Button>
       </div>
     </div>

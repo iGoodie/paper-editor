@@ -4,15 +4,19 @@ import { IEditorContext } from "../../context/EditorContext";
 import { Layer } from "../../editor/base/Layer";
 import { ReactComponent as Icon } from "../../assets/icon/background.svg";
 import { ImagePicker } from "../../components/ImagePicker";
+import { formatIntlMessage } from "../../registry/intl/intl";
 
 export class PreviewBackgroundLayer extends Layer {
-  constructor() {
-    super();
-    this.layerName = "Background";
+  getLayerName(): string {
+    return formatIntlMessage("papereditor.title.background");
   }
 
   getType(): string {
     return "preview-background-layer";
+  }
+
+  renderDescription(ctx: IEditorContext): React.ReactNode {
+    return "";
   }
 
   renderIcon(ctx: IEditorContext): ReactNode {
@@ -20,7 +24,7 @@ export class PreviewBackgroundLayer extends Layer {
   }
 
   renderTypeText(ctx: IEditorContext): ReactNode {
-    return "Preview Element";
+    return formatIntlMessage("papereditor.title.preview-element");
   }
 
   renderCanvas(ctx: IEditorContext): ReactNode {
@@ -31,8 +35,7 @@ export class PreviewBackgroundLayer extends Layer {
     return (
       <React.Fragment>
         <p style={{ padding: 10, margin: 0, color: "#fff" }}>
-          This is a preview layer! Here to guide you while constructing your
-          template. This layer will not be present while printing.
+          {formatIntlMessage("papereditor.info.background")}
         </p>
 
         <ImagePicker

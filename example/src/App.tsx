@@ -14,6 +14,8 @@ paperEditor.configure({
   millimeterToPixelRatio: 2,
 });
 
+paperEditor.setIntlMessages(paperEditor.messagesTr);
+
 paperEditor.registries.LayersRegistry.register(StaticTextLayer);
 
 const App = () => {

@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../styles/layers-list.scss";
 import { Layer } from "..";
 import { useEditorContext } from "../context/EditorContext";
-import { getIntlMessage } from "../registry/intl/intl";
 import { ReactComponent as LockIcon } from "../assets/icon/lock.svg";
 
 interface Props {
@@ -31,9 +30,7 @@ export const LayerItem = (props: Props) => {
         )}
       </span>
 
-      <span className={styles.item__title}>
-        {props.layer.layerName ?? getIntlMessage("papereditor.value.untitled")}
-      </span>
+      <span className={styles.item__title}>{props.layer.getLayerName()}</span>
 
       <div className={styles.item__actions}>
         {props.locked && (

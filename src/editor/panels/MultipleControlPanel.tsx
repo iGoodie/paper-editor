@@ -6,6 +6,7 @@ import { ReactComponent as LayersIcon } from "../../assets/icon/layers.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icon/close.svg";
 import { ReactComponent as SelectionBoxIcon } from "../../assets/icon/selection-box.svg";
 import { Button } from "../../components/Button";
+import { formatIntlMessage } from "../../registry/intl/intl";
 
 export const MultipleControlPanel = () => {
   const ctx = useEditorContext();
@@ -30,9 +31,14 @@ export const MultipleControlPanel = () => {
           <LayersIcon />
           <SelectionBoxIcon />
         </div>
-        <h2 className={styles.panel__header__desc}>Selected Layers</h2>
+        <h2 className={styles.panel__header__desc}>
+          {formatIntlMessage("papereditor.title.layers")}
+        </h2>
         <span className={styles.panel__header__title}>
-          {ctx.layers.selectedLayers.length} Layers
+          {formatIntlMessage(
+            "papereditor.title.layer-count",
+            ctx.layers.selectedLayers.length
+          )}
         </span>
         {/* <EditableText
           className={styles.panel__header__title}
@@ -55,7 +61,9 @@ export const MultipleControlPanel = () => {
           bgColor={deleting ? "#E34646" : undefined}
           onClick={deleting ? deleteLayers : beginDeletion}
         >
-          {deleting ? "Confirm Deletion?" : "Delete Selected Layers"}
+          {deleting
+            ? formatIntlMessage("papereditor.btn.confirm-deletion")
+            : formatIntlMessage("papereditor.btn.delete-selected-layers")}
         </Button>
       </div>
     </div>
