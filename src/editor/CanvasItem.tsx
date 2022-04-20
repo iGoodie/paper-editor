@@ -34,6 +34,7 @@ export const CanvasItem = (props: Props) => {
       props.layer.y,
       props.layer.width,
       props.layer.height,
+      props.layer.autoFit,
       ctx.transformations.scale,
     ]
   );

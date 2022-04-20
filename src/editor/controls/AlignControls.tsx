@@ -83,6 +83,8 @@ export const AlignControls = (props: Props) => {
     return (maxY + minY) / 2;
   };
 
+  /* ----------------------- */
+
   const alignLeft = () => {
     const minX = getMinX();
     props.layers.selectedLayers.forEach((layer) => (layer.x = minX));

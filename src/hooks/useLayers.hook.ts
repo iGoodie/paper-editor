@@ -1,6 +1,7 @@
 import React from "react";
 import { IEditorContext } from "../context/EditorContext";
 import { Layer, SerializedLayer } from "../editor/base/Layer";
+import { configurations } from "../registry/configurations";
 import { getUnitByAbbr, MeasurementUnit } from "../util/units.util";
 
 export function useLayers(
@@ -34,7 +35,6 @@ export function useLayers(
   const unselectAll = () => setSelectedIndices([]);
 
   const updateLayers = () => {
-    console.debug({ layerList });
     onLayersChange(layerList.map((layer) => layer.serialize()));
   };
 
@@ -71,7 +71,9 @@ export function useLayers(
       return null;
     }
 
-    return ctx.refs.paperRef.current?.querySelector(`:nth-child(${index + 1})`);
+    return ctx.refs.paperRef.current?.querySelector(
+      `:scope > :nth-last-child(${index + 1})`
+    );
   };
 
   const getWidth = (layer: Layer, ctx: IEditorContext) => {
@@ -94,10 +96,6 @@ export function useLayers(
     }
 
     const node = getNode(layer, ctx);
-
-    if (node == null) {
-      return -1;
-    }
 
     if (node == null) {
       return -1;

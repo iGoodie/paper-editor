@@ -59,12 +59,14 @@ export class StaticTextLayer extends Layer {
         <AlignControls layers={ctx.layers} />
 
         <AccordionControl header={"Header here!"}>
-          Hey, content here! <br />
-          Hey, content here! <br />
-          Hey, content here! <br />
-          Hey, content here! <br />
-          Hey, content here! <br />
-          Hey, content here! <br />
+          <button
+            onClick={() => {
+              this.autoFit = !this.autoFit;
+              ctx.layers.updateLayers();
+            }}
+          >
+            Toggle Auto-fit (Current: {this.autoFit.toString()})
+          </button>
         </AccordionControl>
 
         <AccordionControl header={"Header here!"}>
