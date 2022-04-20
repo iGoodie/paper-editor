@@ -6,6 +6,7 @@
   height: var(--height);
   user-select: none;
   transform: translateX(var(--x)) translateY(var(--y));
+  overflow: hidden;
   cursor: pointer;
 
   &:not(&--selected):hover {
