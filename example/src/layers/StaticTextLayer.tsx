@@ -13,10 +13,20 @@ export class StaticTextLayer extends Layer {
   data?: string;
   fontSize?: number; // in millimeters
 
-  constructor() {
-    super();
-    this.data = "Default Text";
-    this.autoFit = true;
+  createLayer(ctx: IEditorContext): StaticTextLayer {
+    const layer = new StaticTextLayer();
+    layer.data = "Default Text";
+    layer.autoFit = true;
+    layer.fontSize = ctx.paperUnit.toMillimeters(
+      ctx.editorProps.paperDimensions.height * 0.1
+    );
+    layer.width = ctx.paperUnit.toMillimeters(
+      ctx.editorProps.paperDimensions.width * 0.5
+    );
+    layer.height = ctx.paperUnit.toMillimeters(
+      ctx.editorProps.paperDimensions.height * 0.1
+    );
+    return layer;
   }
 
   getType(): string {

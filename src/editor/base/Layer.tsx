@@ -23,6 +23,8 @@ export abstract class Layer {
     );
   }
 
+  abstract createLayer(ctx: IEditorContext): Layer;
+
   abstract getType(): string;
 
   abstract renderDescription(ctx: IEditorContext): React.ReactNode;
