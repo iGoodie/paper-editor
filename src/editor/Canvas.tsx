@@ -113,6 +113,7 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
             "--paper-height": `${height}px`,
           };
         }, [
+          ctx.transformations.scale,
           ctx.editorProps.printerMargin?.left,
           ctx.editorProps.printerMargin?.top,
         ])}
