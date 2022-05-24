@@ -14,6 +14,7 @@ import { ModalContextProvider } from "../context/ModalContext";
 
 export interface EditorProps {
   viewportHeight: number;
+  printerMargin?: { left: number; top: number };
   paperDimensions: { width: number; height: number }; // in paperUnits
   paperUnit: MeasurementUnit;
 

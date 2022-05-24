@@ -60,6 +60,7 @@ const App = () => {
         onBackgroundChange={setBg}
         paperUnit={getUnitByName("centimeters")}
         paperDimensions={{ width: 6.1, height: 11 }}
+        printerMargin={{ left: 1, top: 1 }}
         viewportHeight={500}
         theme={theme}
       />

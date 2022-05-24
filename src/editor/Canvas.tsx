@@ -5,6 +5,7 @@ import { CanvasItem } from "./CanvasItem";
 import { useEditorContext } from "../context/EditorContext";
 import { reverseMap } from "../util/reverse-map.util";
 import { formatIntlMessage } from "../registry/intl/intl";
+import { useInlineStyle } from "../hooks/useInlineStyle.hook";
 
 export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const ctx = useEditorContext();
@@ -96,6 +97,32 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
           <CanvasItem key={reverseIndex} index={reverseIndex} layer={layer} />
         ))}
       </div>
+
+      <div
+        className={styles.margins}
+        style={useInlineStyle(() => {
+          const margins = ctx.editorProps.printerMargin;
+          if (margins == null) return {};
+          const left = ctx.paperUnit.toPixels(margins.left);
+          const top = ctx.paperUnit.toPixels(margins.top);
+          const width = ctx.paperUnit.toPixels(
+            ctx.editorProps.paperDimensions.width
+          );
+          const height = ctx.paperUnit.toPixels(
+            ctx.editorProps.paperDimensions.height
+          );
+          return {
+            "--scale": ctx.transformations.scale,
+            "--printer-margin-left": `${left}px`,
+            "--printer-margin-top": `${top}px`,
+            "--paper-width": `${width}px`,
+            "--paper-height": `${height}px`,
+          };
+        }, [
+          ctx.editorProps.printerMargin?.left,
+          ctx.editorProps.printerMargin?.top,
+        ])}
+      />
 
       <div
         className={styles.manifest}
