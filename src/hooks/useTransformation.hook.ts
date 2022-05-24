@@ -1,7 +1,6 @@
 import React from "react";
 import { MathUtils } from "../util/math.util";
-
-type Coordinate = { x: number; y: number };
+import { Coordinate, useMouseGrab } from "./useMouseGrab.hook";
 
 export function useTransformation(
   editorRef: React.RefObject<HTMLDivElement>,
@@ -9,13 +8,20 @@ export function useTransformation(
   paperRef: React.RefObject<HTMLDivElement>
 ) {
   const [scale, setScale] = React.useState<number>(1);
-  const [offset, setOffset] = React.useState<Coordinate>({ x: 0, y: 0 });
 
-  const [grabbing, setGrabbing] = React.useState<boolean>(false);
-  const [grabPos, setGrabPos] = React.useState<Coordinate>({ x: 0, y: 0 });
+  const [offset, setOffset] = React.useState<Coordinate>({ x: 0, y: 0 });
   const [prevOffset, setPrevOffset] = React.useState<Coordinate>({
     x: 0,
     y: 0,
+  });
+  const panning = useMouseGrab({
+    onGrabBegin: () => setPrevOffset(offset),
+    onGrabTick: (delta) => {
+      setOffset({
+        x: prevOffset.x + delta.x,
+        y: prevOffset.y + delta.y,
+      });
+    },
   });
 
   const zoom = (deltaScale: number) => {
@@ -39,32 +45,12 @@ export function useTransformation(
     });
   };
 
-  const beginGrab = (pos: Coordinate) => {
-    setGrabbing(true);
-    setGrabPos(pos);
-    setPrevOffset(offset);
-  };
-
-  const tickGrab = (pos: Coordinate) => {
-    const dx = pos.x - grabPos.x;
-    const dy = pos.y - grabPos.y;
-    setOffset({
-      x: prevOffset.x + dx,
-      y: prevOffset.y + dy,
-    });
-  };
-
-  const endGrab = () => {
-    setGrabbing(false);
-  };
-
   return {
     // Vars
     offset,
     setOffset,
     scale,
     setScale,
-    grabbing,
 
     // Refs
     refs: {
@@ -76,9 +62,7 @@ export function useTransformation(
     // Functionalities
     centerView,
     zoom,
-    beginGrab,
-    endGrab,
-    tickGrab,
+    panning,
   };
 }
 

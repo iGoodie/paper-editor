@@ -21,7 +21,7 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
 
   const onMouseUp = (event: MouseEvent) => {
     if (event.button === 1 /* Mid-click */) {
-      ctx.transformations.endGrab();
+      ctx.transformations.panning.endGrab();
     }
   };
 
@@ -55,7 +55,7 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
     }
 
     if (event.button === 1 /* Mid-click */) {
-      ctx.transformations.beginGrab({
+      ctx.transformations.panning.beginGrab({
         x: event.clientX,
         y: event.clientY,
       });
@@ -63,8 +63,8 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
   };
 
   const onMouseMove = (event: MouseEvent) => {
-    if (ctx.transformations.grabbing) {
-      ctx.transformations.tickGrab({
+    if (ctx.transformations.panning.grabbing) {
+      ctx.transformations.panning.tickGrab({
         x: event.clientX,
         y: event.clientY,
       });
