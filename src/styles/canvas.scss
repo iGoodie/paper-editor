@@ -48,6 +48,7 @@
     border: 2px solid #ff0012;
   }
   &::after {
+    box-sizing: content-box;
     content: "";
     position: absolute;
     bottom: 0;
