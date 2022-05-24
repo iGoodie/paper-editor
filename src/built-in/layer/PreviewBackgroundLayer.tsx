@@ -7,6 +7,10 @@ import { ImagePicker } from "../../components/ImagePicker";
 import { formatIntlMessage } from "../../registry/intl/intl";
 
 export class PreviewBackgroundLayer extends Layer {
+  createLayer(ctx: IEditorContext) {
+    return new PreviewBackgroundLayer();
+  }
+
   getLayerName(): string {
     return formatIntlMessage("papereditor.title.background");
   }

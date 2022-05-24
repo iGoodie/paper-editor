@@ -92,12 +92,6 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
         ].join(" "),
       }}
     >
-      <div ref={ref} className={styles.paper}>
-        {reverseMap(ctx.layers.list, (layer, reverseIndex) => (
-          <CanvasItem key={reverseIndex} index={reverseIndex} layer={layer} />
-        ))}
-      </div>
-
       <div
         className={styles.margins}
         style={useInlineStyle(() => {
@@ -123,6 +117,12 @@ export const Canvas = React.forwardRef<HTMLDivElement>((_props, ref) => {
           ctx.editorProps.printerMargin?.top,
         ])}
       />
+
+      <div ref={ref} className={styles.paper}>
+        {reverseMap(ctx.layers.list, (layer, reverseIndex) => (
+          <CanvasItem key={reverseIndex} index={reverseIndex} layer={layer} />
+        ))}
+      </div>
 
       <div
         className={styles.manifest}
