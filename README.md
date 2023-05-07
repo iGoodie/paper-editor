@@ -1,6 +1,8 @@
 <!-- Logo -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/logo.svg" height="80" alt="Logo" aria-label="Logo" />
+  <a href="https://www.npmjs.com/package/@igoodie/paper-editor">
+    <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/logo.svg" height="100" alt="Logo" aria-label="Logo" />
+  </a>
 </p>
 
 <!-- Slogan -->
