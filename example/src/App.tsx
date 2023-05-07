@@ -8,13 +8,13 @@ import { SerializedLayer } from "paper-editor";
 import { getUnitByName } from "paper-editor";
 import { Editor } from "paper-editor";
 import { theme } from "./theme";
-import "paper-editor/dist/index.css";
+import "paper-editor/index.css";
 
 paperEditor.configure({
   millimeterToPixelRatio: 2,
 });
 
-paperEditor.setIntlMessages(paperEditor.messagesTr);
+paperEditor.setIntlMessages(paperEditor.messagesEn);
 
 paperEditor.registries.LayersRegistry.register(StaticTextLayer);
 

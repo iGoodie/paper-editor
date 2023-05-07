@@ -32,11 +32,10 @@ const unitsByAbbr = new Map<string, MeasurementUnit>();
 function registerUnit(unit: MeasurementUnit) {
   unitsByName.set(unit.name, unit);
   unitsByAbbr.set(unit.abbr, unit);
+  return unit;
 }
 
-const defaultUnit = new MeasurementUnit("millimeters", "mm", 1);
-
-registerUnit(defaultUnit);
+const defaultUnit = registerUnit(new MeasurementUnit("millimeters", "mm", 1));
 registerUnit(new MeasurementUnit("centimeters", "cm", 10));
 registerUnit(new MeasurementUnit("meters", "m", 1000));
 registerUnit(new MeasurementUnit("inches", "inch", 25.4));

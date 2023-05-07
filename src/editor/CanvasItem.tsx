@@ -28,10 +28,12 @@ export const CanvasItem = (props: Props) => {
       });
     },
     onGrabTick: (delta) => {
-      props.layer.x =
-        prevPos.x + unitMm.fromPixels(delta.x) / ctx.transformations.scale;
-      props.layer.y =
-        prevPos.y + unitMm.fromPixels(delta.y) / ctx.transformations.scale;
+      ctx.layers.selectedLayers.forEach((layer) => {
+        layer.x =
+          prevPos.x + unitMm.fromPixels(delta.x) / ctx.transformations.scale;
+        layer.y =
+          prevPos.y + unitMm.fromPixels(delta.y) / ctx.transformations.scale;
+      });
       ctx.layers.updateLayers();
     },
   });

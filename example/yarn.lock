@@ -1621,15 +1621,15 @@
     pretty-format "^25.1.0"
     wait-for-expect "^3.0.2"
 
-"@testing-library/jest-dom@link:../node_modules/@testing-library/jest-dom":
+"@testing-library/jest-dom@file:../node_modules/@testing-library/jest-dom":
   version "0.0.0"
   uid ""
 
-"@testing-library/react@link:../node_modules/@testing-library/react":
+"@testing-library/react@file:../node_modules/@testing-library/react":
   version "0.0.0"
   uid ""
 
-"@testing-library/user-event@link:../node_modules/@testing-library/user-event":
+"@testing-library/user-event@file:../node_modules/@testing-library/user-event":
   version "0.0.0"
   uid ""
 
@@ -1810,7 +1810,7 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@link:../node_modules/@types/jest":
+"@types/jest@file:../node_modules/@types/jest":
   version "0.0.0"
   uid ""
 
@@ -1834,7 +1834,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.21.tgz#864b987c0c68d07b4345845c3e63b75edd143644"
   integrity sha512-DBZCJbhII3r90XbQxI8Y9IjjiiOGlZ0Hr32omXIZvwwZ7p4DMMXGrKXVyPfuoBOri9XNtL0UK69jYIBIsRX3QQ==
 
-"@types/node@link:../node_modules/@types/node":
+"@types/node@file:../node_modules/@types/node":
   version "0.0.0"
   uid ""
 
@@ -1875,7 +1875,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@link:../node_modules/@types/react-dom":
+"@types/react-dom@file:../node_modules/@types/react-dom":
   version "0.0.0"
   uid ""
 
@@ -1888,7 +1888,7 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@link:../node_modules/@types/react":
+"@types/react@file:../node_modules/@types/react":
   version "0.0.0"
   uid ""
 
@@ -6413,7 +6413,7 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-"paper-editor@link:..":
+"paper-editor@file:..":
   version "0.0.0"
   uid ""
 
@@ -7278,7 +7278,7 @@ react-dev-utils@^12.0.0:
     strip-ansi "^6.0.1"
     text-table "^0.2.0"
 
-"react-dom@link:../node_modules/react-dom":
+"react-dom@file:../node_modules/react-dom":
   version "0.0.0"
   uid ""
 
@@ -7317,7 +7317,7 @@ react-refresh@^0.11.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
 
-"react-scripts@link:../node_modules/react-scripts":
+"react-scripts@file:../node_modules/react-scripts":
   version "0.0.0"
   uid ""
 
@@ -7330,7 +7330,7 @@ react-textarea-autosize@^8.3.2:
     use-composed-ref "^1.0.0"
     use-latest "^1.0.0"
 
-"react@link:../node_modules/react":
+"react@file:../node_modules/react":
   version "0.0.0"
   uid ""
 
@@ -8390,7 +8390,7 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-"typescript@link:../node_modules/typescript":
+"typescript@file:../node_modules/typescript":
   version "0.0.0"
   uid ""
 
