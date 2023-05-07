@@ -1,6 +1,6 @@
 <!-- Logo -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/logo.svg" height="150" alt="Logo" aria-label="Logo" />
+  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/logo.svg" height="80" alt="Logo" aria-label="Logo" />
 </p>
 
 <!-- Slogan -->
