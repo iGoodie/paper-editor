@@ -1,6 +1,6 @@
 <!-- Logo -->
 <p align="center">
-  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/logo.png" height="150" alt="Logo" aria-label="Logo" />
+  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/logo.svg" height="150" alt="Logo" aria-label="Logo" />
 </p>
 
 <!-- Slogan -->
@@ -11,7 +11,7 @@
 <p align="center">
 
   <!-- Main Badges -->
-  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/main-badge.png" height="20px"/>
+  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/main-badge.svg" height="20px"/>
   <a href="https://www.npmjs.com/package/@igoodie/paper-editor">
     <img src="https://img.shields.io/npm/v/@igoodie/paper-editor"/>
   </a>
@@ -28,7 +28,7 @@
   <br/>
 
   <!-- Github Badges -->
-  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/github-badge.png" height="20px"/>
+  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/github-badge.svg" height="20px"/>
   <a href="https://github.com/iGoodie/paper-editor/commits/master">
     <img src="https://img.shields.io/github/last-commit/iGoodie/paper-editor"/>
   </a>
@@ -42,7 +42,7 @@
   <br/>
 
   <!-- Support Badges -->
-  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/support-badge.png" height="20px"/>
+  <img src="https://raw.githubusercontent.com/iGoodie/paper-editor/master/.github/assets/support-badge.svg" height="20px"/>
   <a href="https://discord.gg/KNxxdvN">
     <img src="https://img.shields.io/discord/610497509437210624?label=discord"/>
   </a>
