@@ -65,6 +65,7 @@ This library exposes an extensible and configurable core editor component
 
 - [ ] Migrate to Vite
 - [ ] Create Storyboard for the default configuration
+- [ ] Complete the doc on how to extend features
 
 # License
 
